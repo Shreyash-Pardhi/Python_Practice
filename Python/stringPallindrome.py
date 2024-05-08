@@ -29,3 +29,14 @@ def pallindrome(str):
         return 'Not a Pallindrome'
 
 print(pallindrome(string))
+
+
+# string = input()
+# rev = ''
+# for i in string:
+#     rev = i + rev
+
+# if(string == rev):
+#     print('Pallindrome')
+# else:
+#     print('Not Pallindrome')
