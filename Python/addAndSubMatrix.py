@@ -1,6 +1,4 @@
-a = [[2,3],[4,5]]
-b = [[1,1],[1,1]]
-c=[0]
-for i in range(len(a)):
-    c[i]=a[i]+b[i]
-print(c)
+import numpy as np
+a =np.array([[2,3],[4,5]])
+b =np.array([[1,1],[1,1]])
+print(np.sum(a,b))
