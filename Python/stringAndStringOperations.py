@@ -22,4 +22,7 @@ print(s1.capitalize()) #capitalizes 1st letter of string
 print('abc'.center(20,'~')) #center allign
 print('def'.ljust(20,'#')) #left allign
 print('ghi'.rjust(30,'+')) #right allign
-print(s1.strip())
+print(s1.strip()) #removes the space from both ends of string
+print(s1.rstrip()) #removes the space from right end of string
+print(s1.lstrip()) #removes the space from left end of string
+print(len(s1))
