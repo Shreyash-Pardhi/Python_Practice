@@ -1,6 +1,7 @@
 import re
 str = "123@delaplex.com 12 12 131"
 g = re.search("@delaplex.com$", str)
+print(type(g))
 print(f'Valid Delaplex Employee' if g else 'Not a delaplex Employee')
 
 a = re.findall("1\Z", str)
