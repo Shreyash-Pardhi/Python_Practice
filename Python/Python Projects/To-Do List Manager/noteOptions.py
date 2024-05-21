@@ -4,18 +4,17 @@ import deleteNotes
 def NoteOptions():
     try:
         while(True):
-            opt = int(input("Press 1-Create Note, 2-Show Note, 3-Delete Note, 0-Exit: "))
+            opt = int(input("\nPress 1-Create Note, 2-Show Note, 3-Delete Note, 0-Exit: "))
             match opt:
                 case 0: 
+                    print("Thank you for using Notes Application")
                     return False
                 case 1:
-                    note=input("Enter a Note: ")
-                    createNotes.CreateNote(note)
+                    createNotes.CreateNote()
                 case 2:
                     showNotes.ShowNotes()
                 case 3:
-                    id = input("Enter Node Id: ")
-                    deleteNotes.DeleteNote(id)
+                    deleteNotes.DeleteNote()
                 case default:
                     print("Wrong Option")
     

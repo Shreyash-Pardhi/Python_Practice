@@ -1,8 +1,9 @@
 import datetime
 NoteID = 1
-def CreateNote(note):
+def CreateNote():
     try:
         global NoteID
+        note=input("Enter a Note: ")
         with open('Python Projects\\To-Do List Manager\\NOTES.txt', 'a') as file:
             file.write(f"Note id: {NoteID}\n"+f"Date & Time: {datetime.datetime.now()}\n"+ f"Note: {note}" + "\n\n")
             NoteID+=1
