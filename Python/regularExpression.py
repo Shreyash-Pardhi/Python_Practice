@@ -8,7 +8,7 @@ a = re.findall("1\Z", str)
 #print(" ".join(a))
 print(a)
 
-mob='000008788904106'
+mob='87889084106'
 _mob=mob.lstrip('0')
 b = re.findall("^[1-9].{8}[0-9]$", _mob)
 print(f"{b},Valid mobile number" if b else "Not a Valid number! Check again")
