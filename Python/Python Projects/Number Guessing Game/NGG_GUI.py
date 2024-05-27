@@ -1,5 +1,15 @@
 from tkinter import *
 import random
+
+root = Tk()
+root.geometry("400x300")
+root.maxsize(400,300)
+root.minsize(400,300)
+root.title("Number Guessing Game")
+root.configure(bg="#40A578")
+img = PhotoImage(file="Python Projects\\Number Guessing Game\\numberguessing1.png")
+root.iconphoto(False, img)
+
 num =0
 totalAttempts =0
 
@@ -44,13 +54,6 @@ def Operations():
     except Exception as e:
         result["text"] = "Please\nproperly enter the range\nand number to guess"
         lbl.set(0)
-    
-root = Tk()
-root.geometry("400x300")
-root.maxsize(400,300)
-root.minsize(400,300)
-root.title("Number Guessing Game")
-root.configure(bg="#40A578")
 
 
 Label(root,text="Number Guessing Game",font=("bold",20),bg="#40A578").place(x=50,y=15)  
