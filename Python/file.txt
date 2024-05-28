@@ -1,1 +1,5 @@
-writing content in a file
+writing content in a file 
+ok
+this
+is 
+nice
