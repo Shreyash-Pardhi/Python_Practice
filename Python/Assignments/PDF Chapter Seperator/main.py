@@ -9,16 +9,21 @@ page3 = pdf_doc.load_page(page_id=8)
 
 pg = page1.get_text("text") + page2.get_text("text") + page3.get_text("text")
 
-chap = re.findall("Chapter.*",pg)
-pg_list=[]
+chapter_line = re.findall("Chapter.*",pg)
+chapter_pageNo=[]
 
-for i in chap:
+for i in chapter_line:
     strr = i
     pg_no = strr.split()[-1]
-    pg_list.append(int(pg_no))
-
-for i in range (len(pg_list)-1):
-
+    chapter_pageNo.append(int(pg_no))
+    
+for i in range (len(chapter_pageNo)):
     pdf2 = fitz.open()
-    pdf2.insert_pdf(pdf_doc,from_page=(pg_list[i]+9), to_page=(pg_list[i+1]+8))
+    if(i == (len(chapter_pageNo)-1)):
+        pdf2.insert_pdf(pdf_doc,from_page=(chapter_pageNo[i]+9))
+        pdf2.save(f"Chapter{i+1}.pdf")
+        break
+    
+    pdf2 = fitz.open()
+    pdf2.insert_pdf(pdf_doc,from_page=(chapter_pageNo[i]+9), to_page=(chapter_pageNo[i+1]+8))
     pdf2.save(f"Chapter{i+1}.pdf")
