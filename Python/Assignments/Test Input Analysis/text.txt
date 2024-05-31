@@ -1,0 +1,4 @@
+Problem2-Develop a Python program to analyze a provided text input. Within the program,
+incorporate functionalities to manually count the number of words, characters, and sentences in the given text.
+Additionally, devise a mechanism to identify the most common word in the text and 
+determine its frequency without employing any built-in functions or libraries.
