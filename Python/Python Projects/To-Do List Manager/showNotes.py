@@ -1,6 +1,6 @@
 def ShowNotes():
     try:
-        with open('Python Projects\\To-Do List Manager\\NOTES.txt', 'r') as file:
+        with open('D:\\Work and Assignments\\Python\\Python Projects\\To-Do List Manager\\NOTES.txt', 'r') as file:
             notes = file.read()        
             print("Notes are Empty, create new note..." if len(notes)==0 else notes)
     except Exception as e:
