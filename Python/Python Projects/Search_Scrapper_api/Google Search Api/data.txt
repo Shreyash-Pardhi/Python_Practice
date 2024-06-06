@@ -1,0 +1,1 @@
+{'query': 'Google Chat online', 'link': 'https://www.google.com/search?sca_esv=8bbf3b779c27648f&hl=en&gl=us&q=Google+Chat+online&sa=X&ved=2ahUKEwjpsIaJ6saGAxX0JzQIHZSaAWMQ1QJ6BAguEAE'}
