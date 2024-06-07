@@ -1,7 +1,7 @@
 import os
 from google.cloud import vision
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "Python Projects\\Google Vision API\\api_KEY.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "D:\\Work and Assignments\\Python\\Assessment-2 (GOOGLE VISION API)\\storage_key.json"
 
 def detect_logos(path):
 
@@ -24,10 +24,11 @@ def detect_logos(path):
     text = [txt.description for txt in texts]
     landmark = [loc.description for loc in landmarks]
     
-    print("Logos : ",logo)
-    print("Texts : ",text[0])
-    print("Landmark/Location: ", landmark)
+    print(logos)
+    # print("Logos : ",logo)
+    # print("Texts : ",text[0])
+    # print("Landmark/Location: ", landmark)
     
 
 
-detect_logos("Python Projects\\Google Vision API\\zeeMarathi.jpg")
+detect_logos("D:\\Work and Assignments\\Python\\Python Projects\\Google Vision API\\mahindra.jpg")
