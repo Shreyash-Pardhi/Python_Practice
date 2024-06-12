@@ -1,0 +1,293 @@
+product_name,product_url,Extracted_Details_from_Image
+Puma Unisex-Adult Smashic Casual Shoe,https://m.media-amazon.com/images/I/51MiYR1te6L._SY695_.jpg,"Brand: Puma, Description: ['Shoe', 'Walking shoe', 'Grey', 'Sportswear', 'Sneakers', 'Font', 'Athletic shoe', 'Electric blue', 'Outdoor shoe', 'Carmine'], Text: PUMA, Object: ['Shoe']"
+NIKE Womens W Revolution 7 Running Shoe,https://m.media-amazon.com/images/I/71cy1dbMh5L._SX695_.jpg,"Brand: Nike, Description: ['Footwear', 'Shoe', 'Product', 'Walking shoe', 'Sneakers', 'Grey', 'Sportswear', 'Font', 'Electric blue', 'Athletic shoe'], Text: None, Object: ['Shoe']"
+Sparx Men's Sc0162g Sneakers,https://m.media-amazon.com/images/I/71xWtLhH2GL._SX695_.jpg,"Brand: Sparx, Description: ['Footwear', 'Shoe', 'Product', 'Walking shoe', 'Grey', 'Sportswear', 'Sneakers', 'Skate shoe', 'Font', 'Outdoor shoe'], Text: None, Object: ['Shoe']"
+Puma Womens Kendall WNS Running Shoe,https://m.media-amazon.com/images/I/61C+Y9zoAQL._SY695_.jpg,"Brand: Puma, Description: ['Footwear', 'Shoe', 'Outdoor shoe', 'Walking shoe', 'Sportswear', 'Sneakers', 'Font', 'Magenta', 'Cleat', 'Skate shoe'], Text: None, Object: ['Shoe']"
+Nivia Men's Combat 2.0 Basketball Shoes,https://m.media-amazon.com/images/I/71YG7EClYfL._SX679_.jpg,"Brand: Nivia Sports, Description: ['Outdoor shoe', 'Walking shoe', 'Font', 'Sneakers', 'Sportswear', 'Synthetic rubber', 'Athletic shoe', 'Electric blue', 'Boot', 'Carmine'], Text: AIN, Object: ['Shoe']"
+adidas Mens Amalgo M Running Shoe,https://m.media-amazon.com/images/I/81ATe15IyHL._SX695_.jpg,"Brand: Adidas, Description: ['Footwear', 'Shoe', 'Walking shoe', 'Outdoor shoe', 'Grey', 'Sportswear', 'Sneakers', 'Font', 'Athletic shoe', 'Pattern'], Text: None, Object: ['Shoe']"
+Red Tape Casual Sneaker Shoes for Men,https://m.media-amazon.com/images/I/61OBcY37KXL._SY695_.jpg,"Brand: Red Tape, Description: ['Footwear', 'Outdoor shoe', 'Walking shoe', 'Sportswear', 'Sneakers', 'Font', 'Athletic shoe', 'Cross training shoe', 'Electric blue', 'Running shoe'], Text: REDTAPE
+CLASSIC, Object: ['Shoe']"
+Bata Mens MaxUniform Dress Shoe,https://m.media-amazon.com/images/I/710+f7XX2FL._SY695_.jpg,"Brand: Bata, Description: ['Brown', 'Shoe', 'Walking shoe', 'Sportswear', 'Sneakers', 'Font', 'Athletic shoe', 'Outdoor shoe', 'Electric blue', 'Logo'], Text: mmm
+Bata, Object: ['Shoe']"
+SPARX Mens Sx0675g Walking Shoe,https://m.media-amazon.com/images/I/71u2XOFXAIL._SX695_.jpg,"Brand: Sparx, Description: ['Footwear', 'Shoe', 'Outdoor shoe', 'Sneakers', 'Walking shoe', 'Grey', 'Sportswear', 'Font', 'Synthetic rubber', 'Electric blue'], Text: parx
+CUSHIONED foam, Object: ['Shoe']"
+Campus Stack Sneakers for Men,https://m.media-amazon.com/images/I/61U0BBQYhrL._SY695_.jpg,"Brand: Campus, Description: ['Footwear', 'Shoe', 'Outdoor shoe', 'Walking shoe', 'Cleat', 'Grey', 'Sneakers', 'Sportswear', 'Font', 'Athletic shoe'], Text: None, Object: ['Shoe']"
+ADIDAS Mens Regular Fit M Sereno Bos T2 Jerseys,https://m.media-amazon.com/images/I/71IQc8cAIQL._SX569_.jpg,"Brand: Adidas, Description: ['Hair', 'Outerwear', 'Arm', 'Shoulder', 'White', 'Neck', 'Human body', 'Sleeve', 'Standing', 'Gesture'], Text: adidas, Object: ['Person', 'Top', 'Top', 'Person']"
+adidas Men's Regular Fit M D2M Polo,https://m.media-amazon.com/images/I/71fKZrHSO9L._SX569_.jpg,"Brand: Adidas, Description: ['Joint', 'Arm', 'Shoulder', 'Jersey', 'Human body', 'Neck', 'Sleeve', 'Gesture', 'Collar', 'Elbow'], Text: None, Object: ['Person', 'Top', 'Top', 'Person', 'Shirt']"
+Puma Men's Solid Regular Fit T-Shirt,https://m.media-amazon.com/images/I/71FAiQfnqSL._SX569_.jpg,"Brand: Puma, Description: ['Arm', 'Shoulder', 'White', 'Human body', 'Neck', 'Sleeve', 'Gesture', 'Elbow', 'Grey', 'Collar'], Text: None, Object: ['Person', 'Top', 'Top', 'Person']"
+Puma Men's Regular fit T-Shirt,https://m.media-amazon.com/images/I/61z4pzDQROL._SX569_.jpg,"Brand: Puma, Description: ['Arm', 'Shoulder', 'Jersey', 'Azure', 'Human body', 'Sleeve', 'Waist', 'Gesture', 'Elbow', 'Collar'], Text: None, Object: ['Outerwear', 'Person']"
+Puma Men's T-Shirt,https://m.media-amazon.com/images/I/71N-eWQzzjL._SX569_.jpg,"Brand: Puma, Description: ['Shoulder', 'White', 'Jersey', 'Human body', 'Neck', 'Dress shirt', 'Sleeve', 'Gesture', 'Elbow', 'Grey'], Text: None, Object: ['Person', 'Top', 'Top', 'Person', 'Pants']"
+Reebok Men's Regular Fit T-Shirt,https://m.media-amazon.com/images/I/51-FneXbwrL._SY741_.jpg,"Brand: Reebok, Description: ['Polo shirt', 'Arm', 'Shoulder', 'Sports uniform', 'Jersey', 'Azure', 'Sleeve', 'Gesture', 'Sports jersey', 'Collar'], Text: Reebok, Object: ['Person', 'Top', 'Person', 'Top', 'Pants']"
+Dennis Lingo Men's Cotton Buffalo Check Slim Fit Casual Shirt with Pocket,https://m.media-amazon.com/images/I/51oqHcH9mcL._SY741_.jpg,"Brand: Dennis, Description: ['Face', 'Arm', 'Tartan', 'Shirt', 'Shoulder', 'Dress shirt', 'Neck', 'Human body', 'Sleeve', 'Jersey'], Text: о
+о, Object: ['Top', 'Person', 'Person', 'Shirt']"
+Thomas Scott Men's Smart Slim Fit Band Collar Pure Cotton Denim Casual Overdyed Shirt,https://m.media-amazon.com/images/I/61a9DdTG-sL._SY741_.jpg,"Brand: Thomas Scott, Description: ['Jeans', 'Shirt', 'Arm', 'Shoulder', 'Dress shirt', 'Dress', 'Jersey', 'Human body', 'Neck', 'Sleeve'], Text: Keep your head mo, Object: ['Top', 'Person', 'Person', 'Shirt', 'Jeans']"
+Lymio Men T-Shirt,https://m.media-amazon.com/images/I/71x4rLhMkML._SY741_.jpg,"Brand: None, Description: ['Joint', 'Outerwear', 'Shoulder', 'Muscle', 'Product', 'Stomach', 'Dress shirt', 'Neck', 'Sleeve', 'Standing'], Text: None, Object: ['Watch', 'Top', 'Pants', 'Clothing']"
+GRECIILOOKS Track Pant for Men,https://m.media-amazon.com/images/I/51rgGjt-lnL._SY741_.jpg,"Brand: None, Description: ['Shoe', 'Active pants', 'Sleeve', 'Waist', 'Gesture', 'Dress shirt', 'Khaki pants', 'Collar', 'Thigh', 'Knee'], Text: None, Object: ['Pants', 'Shoe', 'Shoe']"
+U.S. Polo Assn. Men Signature Logo Pure Cotton,https://m.media-amazon.com/images/I/61fRzTKtwAL._SX569_.jpg,"Brand: U.S. Polo Assn., Description: ['Outerwear', 'White', 'Neck', 'Sleeve', 'Waist', 'Textile', 'Orange', 'Grey', 'Style', 'Knee'], Text: None, Object: ['Shorts', 'Person', 'Underpants']"
+VIMAL JONNEY Men's Slim Track Pants,https://m.media-amazon.com/images/I/71aNV7oOkmL._SX679_.jpg,"Brand: None, Description: ['Joint', 'Leg', 'Active pants', 'Neck', 'Sleeve', 'Waist', 'Knee', 'Thigh', 'Gesture', 'Grey'], Text: None, Object: ['Pants', 'Pants', 'Pants', 'Person', 'Person', 'Person', 'Shoe', 'Shoe', 'Shoe']"
+Fossil Decker Brown Watch,https://m.media-amazon.com/images/I/81DEF+TfCTL._SX679_.jpg,"Brand: Fossil, Description: ['Watch', 'Analog watch', 'Clock', 'Watch accessory', 'Font', 'Silver', 'Rectangle', 'Metal', 'Electric blue', 'Fashion accessory'], Text: 8-
+TACHYMETER
+100/
+95
+100
+血
+ˊ
+500 450 400 350
+FOSSIL
+10 ATM
+18
+111
+I
+150 160 170
+105
+110 115 120
+130, Object: ['Watch']"
+Fastrack Casual Analog White Dial Men's Watch,https://m.media-amazon.com/images/I/51Z3J7uzNfL._SX679_.jpg,"Brand: Fastrack, Description: ['Watch', 'Analog watch', 'Watch accessory', 'Clock', 'Rectangle', 'Font', 'Metal', 'Electric blue', 'Brand', 'Fashion accessory'], Text: Ifastrack
+50
+3, Object: ['Watch']"
+Sonata Men Leather Analog White Dial Watch,https://m.media-amazon.com/images/I/71QvcBxXXxL._SY741_.jpg,"Brand: Sonata, Description: ['Watch', 'Analog watch', 'White', 'Light', 'Product', 'Clock', 'Watch accessory', 'Rectangle', 'Font', 'Material property'], Text: 8
+12
+10
+11
+SONATA
+503537
+6
+LO
+5
+2
+4.
+3, Object: ['Watch']"
+Casio Men Stainless Steel Analog Black Dial Watch,https://m.media-amazon.com/images/I/61hpIjX15vL._SX679_.jpg,"Brand: Casio, Description: ['Watch', 'Analog watch', 'Clock', 'Watch accessory', 'Font', 'Silver', 'Metal', 'Fashion accessory', 'Nickel', 'Brand'], Text: 40
+50
+60
+CASIO
+WATER RESIST
+50M
+JAPAN
+MOV'T
+30
+20
+יוסי, Object: ['Watch']"
+Titan Analog Silver Dial Gold Band Men's Stainless Steel Watch,https://m.media-amazon.com/images/I/81lfqanrciL._SY741_.jpg,"Brand: Titan Company, Description: ['Watch', 'Analog watch', 'Clock', 'Font', 'Material property', 'Watch accessory', 'Rectangle', 'Silver', 'Metal', 'Fashion accessory'], Text: in
+n
+3
+TITAN
+か
+MIER 16
+D
+13
+n
+15
+9
+•
+n
+6
+3
+n
+""
+10
+6
+3
+13
+3
+3
+CIFTIR, Object: ['Watch']"
+"Fire-Boltt Ninja Call Pro Plus 1.83"" Smart Watch with Bluetooth Calling",https://m.media-amazon.com/images/I/61AHiYyu3ZL._SX679_.jpg,"Brand: Fire Boltt, Description: ['Watch', 'Gesture', 'Gadget', 'Smile', 'Communication Device', 'Font', 'Audio equipment', 'Auto part', 'Electronic device', 'Clock'], Text: FIRE BOLTT
+12
+35, Object: ['Watch', 'Person', 'Person']"
+Milton Prudent 1100 Thermosteel 24 Hours Hot and Cold Water Bottle,https://m.media-amazon.com/images/I/71TLCsrjEnL._SX679_.jpg,"Brand: Tim Hortons, Description: ['Liquid', 'Bottle', 'Fluid', 'Drinkware', 'Plastic bottle', 'Glass bottle', 'Alcoholic beverage', 'Cylinder', 'Tints and shades', 'Electric blue'], Text: milton, Object: ['Bottle', 'Bottle']"
+MILTON Aqua 500 Stainless Steel Water Bottle 500-ml Light-Pink,https://m.media-amazon.com/images/I/51AOvn+e1QL._SX679_.jpg,"Brand: Tim Hortons, Description: ['Liquid', 'Bottle', 'Fluid', 'Tints and shades', 'Plastic bottle', 'Magenta', 'Drink', 'Cylinder', 'Plastic', 'Peach'], Text: milton, Objects: None"
+"Redmi 12 (Moonstone Silver,6GB RAM, 128GB Storage)",https://m.media-amazon.com/images/I/71ij5dqxbeL._SX679_.jpg,"Brand: Redmi, Description: ['Mobile phone', 'Communication Device', 'Portable communications device', 'Gadget', 'Gesture', 'Grey', 'Telephony', 'Font', 'Smartphone', 'Rectangle'], Text: Redmi
+Redmi 12, Object: ['Mobile phone', 'Mobile phone']"
+"Redmi A3 (Olive Green, 3GB RAM, 64GB Storage)",https://m.media-amazon.com/images/I/71dJSabHYiL._SX679_.jpg,"Brand: Redmi, Description: ['Automotive tire', 'Audio equipment', 'Automotive lighting', 'Font', 'Gadget', 'Communication Device', 'Sports equipment', 'Automotive design', 'Camera', 'Auto part'], Text: A CAMERA
+Redmi
+Redmi
+A3, Object: ['Mobile phone', 'Mobile phone']"
+Apple Iphone-14,https://m.media-amazon.com/images/I/51Sn5X2gfaL._SX679_.jpg,"Brand: iPhone, Description: ['Communication Device', 'Portable communications device', 'Gesture', 'Mobile phone', 'Telephony', 'Gadget', 'Sleeve', 'Smartphone', 'Aluminium', 'Metal'], Text: None, Object: ['Mobile phone']"
+Apple Iphone 15-pro Max,https://m.media-amazon.com/images/I/61Jrsu9d3-L._SX679_.jpg,"Brand: iPhone, Description: ['Mobile phone', 'Communication Device', 'Portable communications device', 'Gesture', 'Grey', 'Telephony', 'Gadget', 'Automotive exterior', 'Bumper', 'Smartphone'], Text: None, Objects: None"
+Iphone Case-cover,https://m.media-amazon.com/images/I/51pPPth9kyL._SX679_.jpg,"Brand: iPhone, Description: ['Gadget', 'Gas', 'Font', 'Audio equipment', 'Circle', 'Mp3 player', 'Rectangle', 'Number', 'Symbol', 'Multimedia'], Text: None, Object: ['Mobile phone', 'Camera']"
+One Plus Nord3,https://m.media-amazon.com/images/I/51opW+tODpL._SY741_.jpg,"Brand: OnePlus, Description: ['Fixture', 'Door', 'Rectangle', 'Gas', 'Font', 'Metal', 'Handle', 'Circle', 'Aluminium', 'Titanium'], Text: None, Object: ['Mobile phone']"
+One Plus CE4,https://m.media-amazon.com/images/I/51jCor3c-EL._SX679_.jpg,"Brand: OnePlus, Description: ['Communication Device', 'Gesture', 'Rectangle', 'Telephony', 'Portable communications device', 'Gadget', 'Smartphone', 'Metal', 'Electric blue', 'Mobile phone'], Text: None, Object: ['Mobile phone']"
+One plus CE3,https://m.media-amazon.com/images/I/510YZx4v3wL._SX679_.jpg,"Brand: OnePlus, Description: ['Mobile phone', 'Telephony', 'Communication Device', 'Portable communications device', 'Mobile device', 'Gadget', 'Telephone', 'Camera', 'Smartphone', 'Camera lens'], Text: None, Object: ['Mobile phone']"
+Samsung galaxy,https://m.media-amazon.com/images/I/71td5npKu6L._SY741_.jpg,"Brand: Samsung, Description: ['Communication Device', 'Rectangle', 'Gadget', 'Gas', 'Font', 'Netbook', 'Kitchen appliance', 'Major appliance', 'Smartphone', 'Metal'], Text: SAMSUNG, Object: ['Mobile phone']"
+Samsung S24,https://m.media-amazon.com/images/I/81vxWpPpgNL._SX679_.jpg,"Brand: Samsung, Description: ['Font', 'Rectangle', 'Audio equipment', 'Triangle', 'Output device', 'Electronic device', 'Gadget', 'Eyelash', 'Multimedia', 'Circle'], Text: SAMSUNG
+Galaxy
+S24 Ultra
+Galaxy Al is here, Objects: None"
+HP Laptop 15s,https://m.media-amazon.com/images/I/71oQh8WFlyL._SX679_.jpg,"Brand: Hewlett-Packard, Description: ['Computer', 'Laptop', 'Personal computer', 'Output device', 'Peripheral', 'Input device', 'Touchpad', 'Space bar', 'Font', 'Computer hardware'], Text: India's
+No.1
+Brand
+hp
+intel.
+CORE
+13
+*Market Share Report 2024
+11.0
+F
+G
+H
+K
+L
+A, Object: ['Laptop']"
+HP Laptop 15,https://m.media-amazon.com/images/I/61Cs3B5GHhL._SX679_.jpg,"Brand: Hewlett-Packard, Description: ['Computer', 'Laptop', 'Personal computer', 'Output device', 'Touchpad', 'Peripheral', 'Input device', 'Space bar', 'Netbook', 'Webcam'], Text: India's
+No. 1
+Brand*
+hp
+intel
+CORE
+F
+H
+N
+J
+M
+K, Object: ['Laptop']"
+Apple 2022 MacBook Air Laptop,https://m.media-amazon.com/images/I/61P2ia5kurL._SX679_.jpg,"Brand: iPhone, Description: ['Rectangle', 'Font', 'Electronic device', 'Logo', 'Multimedia', 'Brand', 'Gadget', 'Graphics', 'Screenshot', 'Diagram'], Text: What's in the Box
+USB-C Power Adapter
+USB-C to MagSafe 3 Cable (2 m)
+Image is for visual representation purpose only. The actual accessory may vary., Objects: None"
+DELL Latitude 5490 Core i5 8th Gen Laptop,https://m.media-amazon.com/images/I/418cc1MvF1L._SX679_.jpg,"Brand: Dell, Description: ['Laptop', 'Computer', 'Personal computer', 'Output device', 'Netbook', 'Touchpad', 'Peripheral', 'Flat panel display', 'Gadget', 'Computer monitor accessory'], Text: DELL
+DELL, Object: ['Laptop']"
+Dell 14 Thin & Light Laptop,https://m.media-amazon.com/images/I/71Eu1-dfTmL._SX679_.jpg,"Brand: Dell, Description: ['Computer', 'Personal computer', 'Output device', 'Laptop', 'Gadget', 'Computer hardware', 'Laptop part', 'Font', 'Electronic instrument', 'Laptop accessory'], Text: DELL
+Technologies
+#1 INDIA'S MOST
+TRUSTED BRAND*
+*Brand Trust Report 2024
+W
+X
+P
+Word
+Excel
+PowerPoint
+Office Home & Student 2021 Pre-Installed, Object: ['Laptop']"
+ASUS VivoBook 15 (2021) Thin and Light Laptop,https://m.media-amazon.com/images/I/71lYhcc++AL._SX679_.jpg,"Brand: Asus, Description: ['Computer', 'Laptop', 'Personal computer', 'Output device', 'Netbook', 'Gadget', 'Input device', 'Laptop part', 'Font', 'Computer hardware'], Text: BEST
+OF TECH
+©
+ASUS
+V I V O B O 9 K
+ASUS, Object: ['Laptop']"
+"Lenovo ThinkPad E14 Intel Core i5 12th Gen 14"" FHD Thin and Light Laptop",https://m.media-amazon.com/images/I/617Af4lsBNL._SX679_.jpg,"Brand: Lenovo ThinkPad, Description: ['Computer', 'Personal computer', 'Laptop', 'Touchpad', 'Output device', 'Peripheral', 'Input device', 'Netbook', 'Space bar', 'Gesture'], Text: intel.
+CORE
+15
+ThinkPad
+E14, Object: ['Laptop']"
+"Lenovo ThinkPad E14 Intel Core i3 12th Gen 14"" FHD Thin and Light Laptop",https://m.media-amazon.com/images/I/518BYF8LHRL._SY450_.jpg,"Brand: Lenovo ThinkPad, Description: ['Computer', 'Personal computer', 'Laptop', 'Touchpad', 'Output device', 'Input device', 'Netbook', 'Peripheral', 'Space bar', 'Electronic instrument'], Text: ThinkPad, Object: ['Laptop']"
+ASUS Vivobook Pro 15 AMD Ryzen 7,https://m.media-amazon.com/images/I/61eTPcEsC+L._SX679_.jpg,"Brand: Asus, Description: ['Computer', 'Personal computer', 'Output device', 'Font', 'Laptop', 'Computer keyboard', 'Electronic instrument', 'Computer hardware', 'Office equipment', 'Display device'], Text: BEST
+OF TECH
+ASUS
+NVIDIA.
+V I V O B O O K
+VIV
+STUDIO
+ASUS Vivobook, Object: ['Laptop']"
+Lenovo Yoga Slim 7 Pro Intel Evo Core i5-11320H,https://m.media-amazon.com/images/I/51qPrXE56-L._SX679_.jpg,"Brand: Lenovo K6 Power, Description: ['Computer', 'Personal computer', 'Laptop', 'Touchpad', 'Output device', 'Input device', 'Space bar', 'Laptop accessory', 'Peripheral', 'Gadget'], Text: Lenovo
+YOGɅ
+intel
+evo
+cote
+4
+G
+ラ
+B
+9
+Q
+W
+E
+R
+T
+Y
+U
+O
+P
+S
+D
+F
+G
+H
+J
+K
+L
+x
+C
+B
+N
+M
+A
+Gu
+Lenovo, Object: ['Laptop']"
+LG 164 cm (65 inches) 4K Ultra HD Smart LED TV,https://m.media-amazon.com/images/I/8195aYGDl9L._SX450_.jpg,"Brand: Lg, Description: ['Line', 'Font', 'Magenta', 'Violet', 'Rectangle', 'Tints and shades', 'Terrestrial plant', 'Pattern', 'Electric blue', 'Graphics'], Text: LG UHD AT Thing
+4K Smart TV
+Gen6
+Al Processor 4K 60HZ
+REFRESH RATE
+Game
+Optimizer, Object: ['Television']"
+Samsung 108 cm (43 inches) D Series Crystal 4K Vivid Pro Ultra HD Smart LED TV,https://m.media-amazon.com/images/I/81aKi8uAUsL._SX450_.jpg,"Brand: Samsung, Description: ['Purple', 'Organism', 'Violet', 'Font', 'Magenta', 'Science', 'Electric blue', 'Astronomical object', 'Event', 'Circle'], Text: SAMSUNG
+2024 Launch
+Crystal 4K Vivid Pro
+2024 D Series
+4K Upscaling
+Solar Cell
+Remote
+Multiple Voice
+Assistant, Object: ['Television']"
+Samsung 80 cm (32 inches) HD Ready Smart LED,https://m.media-amazon.com/images/I/71S8iUPW9bL._SX450_.jpg,"Brand: Samsung, Description: ['Computer', 'Output device', 'Personal computer', 'Font', 'Computer monitor', 'Sky', 'Television', 'Television set', 'Cloud', 'Flat panel display'], Text: SAMSUNG
+HD Smart TV
+PurColor
+HDR
+DODOLBY
+DIGITAL PLUS, Object: ['Television', 'Animal', 'Television', 'Animal']"
+MI 108 cm (43 inches) A Series Full HD Smart Google TV L43M8-5AIN,https://m.media-amazon.com/images/I/71UXTb93oZL._SX450_.jpg,"Brand: Mi, Description: ['Orange', 'Font', 'Rectangle', 'Slope', 'Natural landscape', 'Advertising', 'Poster', 'Logo', 'Brand', 'Graphics'], Text: Xiaomi
+Smart TV A Series
+43 2023 Edition
+Google TV PatchWall+
+Dolby Audio
+|
+dts
+VIRTUAL, Object: ['Television']"
+Samsung 108 cm (43 inches) Full HD Smart LED TV,https://m.media-amazon.com/images/I/91mRUNnqqnL._SX569_.jpg,"Brand: Samsung, Description: ['Mountain', 'Slope', 'Natural landscape', 'Travel', 'Font', 'Landscape', 'Magenta', 'Mountain range', 'Hill', 'Plateau'], Text: SAMSUNG
+Full HD TV, Object: ['Television', 'Television']"
+Acer 100 cm (40 inches) Advanced I Series Full HD Smart LED Google TV ,https://m.media-amazon.com/images/I/5126gXnEjFL._SX450_.jpg,"Brand: Acer, Description: ['Orange', 'Rectangle', 'Font', 'Material property', 'Tints and shades', 'Window', 'Logo', 'Automotive exterior', 'Advertising', 'Brand'], Text: FRAMELESS
+DESIGN
+30W
+HIGH FIDELITY
+SPEAKERS
+acer
+Google TV
+40 FHD
+16GB STORAGE 1.5GB RAM Dolby Audio, Object: ['Television']"
+Sony Bravia 108 cm (43 inches) 4K Ultra HD Smart LED Google TV,https://m.media-amazon.com/images/I/715-IBd7vlL._SX450_.jpg,"Brand: Dolby Laboratories, Description: ['Font', 'Display device', 'Screenshot', 'Magenta', 'Multimedia', 'Graphics', 'Electric blue', 'Logo'], Text: SONY
+4K
+HDR
+Google TVI
+LIVE
+COLOR
+Dolby
+AUDIO, Objects: None"
+Sony Bravia 164 cm (65 inches) 4K Ultra HD Smart LED Google TV KD,https://m.media-amazon.com/images/I/81MRU+3RJLL._SX450_.jpg,"Brand: Bravia, Description: ['Photograph', 'Rectangle', 'Purple', 'Petal', 'Pink', 'Font', 'Magenta', 'Art', 'Technology', 'Painting'], Text: SONY
+Google TV I
+LIVE
+COLOR
+Dolby
+AUDIO
+4K
+HDR
+Features for
+PlayStation®5, Object: ['Television']"
+Sony 139 cm (55 inches) BRAVIA 2 4K Ultra HD Smart LED Google TV ,https://m.media-amazon.com/images/I/819lC-tC8iL._SX450_.jpg,"Brand: Bravia, Description: ['Wheel', 'Tire', 'Car', 'Land vehicle', 'Vehicle', 'Automotive lighting', 'Motor vehicle', 'Automotive design', 'Hood', 'Automotive tire'], Text: SONY
+BRAVIA 2
+28 Castrel
+36
+MAZDA
+23
+Google TV |
+LIVE
+COLOR
+Dolby
+Features for
+AUDIO
+PlayStation®5, Object: ['Television', 'Car', 'Wheel', 'Car', 'Tire', 'Car']"
+Sony Bravia 80 cm (32 inches) HD Ready Smart LED Google TV,https://m.media-amazon.com/images/I/71EcYIKenVL._SX450_.jpg,"Brand: Bravia, Description: ['Green', 'Terrestrial plant', 'Rectangle', 'Font', 'Vehicle', 'Technology', 'Automotive mirror', 'Wheel', 'Tire', 'Logo'], Text: SONY
+HDR
+Google TV | X-Reality PRO
+SONY
+Ok Google, Object: ['Television']"

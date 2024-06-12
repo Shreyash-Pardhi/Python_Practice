@@ -1,12 +1,7 @@
 product_name,url,Extracted_Details_from_Image
-NIKE Womens W Revolution 7 Running Shoe,https://m.media-amazon.com/images/I/71cy1dbMh5L._SX695_.jpg,"Brand: Nike, Description: ['Footwear', 'Shoe', 'Product', 'Walking shoe', 'Sneakers', 'Grey', 'Sportswear', 'Font', 'Electric blue', 'Athletic shoe'] ,Text: None"
-Puma Men's T-Shirt,https://m.media-amazon.com/images/I/51V8KtLHdmL._SY741_.jpg,"Brand: Puma, Description: ['Head', 'Arm', 'Human body', 'Neck', 'Sleeve', 'Jersey', 'Waist', 'Gesture', 'Chest', 'Sportswear'] ,Text: PUMA"
-Asus Vivobook 15,https://m.media-amazon.com/images/I/71Ue-ZFSPJL._SX679_.jpg,"Brand: Asus, Description: ['Computer', 'Laptop', 'Personal computer', 'Output device', 'Touchpad', 'Netbook', 'Space bar', 'Input device', 'Peripheral', 'Gadget'] ,Text: BEST
-OF TECH
-ASUS
-V IV O B O O K
-SAPTOPS CE
-ASUS Vivobook"
-Brown Zip Wallet,https://m.media-amazon.com/images/I/910SYv5lcOL._SY695_.jpg,"Brand: Fastrack, Description: ['Brown', 'Rectangle', 'Beige', 'Luggage and bags', 'Wallet', 'Bag', 'Font', 'Shoulder bag', 'Fashion accessory', 'Peach'] ,Text: fastrack"
-Apple Iphone 15 pro max,https://m.media-amazon.com/images/I/81fxjeu8fdL._SX679_.jpg,"Brand: iPhone, Description: ['Mobile phone', 'Telephony', 'Communication Device', 'Gesture', 'Camera lens', 'Gadget', 'Portable communications device', 'Bumper', 'Camera', 'Audio equipment'] ,Text: None"
-    
+"Redmi 12 (Moonstone Silver,6GB RAM, 128GB Storage)",https://m.media-amazon.com/images/I/71ij5dqxbeL._SX679_.jpg,"Brand: Redmi, Description: ['Mobile phone', 'Communication Device', 'Portable communications device', 'Gadget', 'Gesture', 'Grey', 'Telephony', 'Font', 'Smartphone', 'Rectangle'], Text: Redmi
+Redmi 12, Object: ['Mobile phone', 'Mobile phone']"
+"Redmi A3 (Olive Green, 3GB RAM, 64GB Storage)",https://m.media-amazon.com/images/I/71dJSabHYiL._SX679_.jpg,"Brand: Redmi, Description: ['Automotive tire', 'Audio equipment', 'Automotive lighting', 'Font', 'Gadget', 'Communication Device', 'Sports equipment', 'Automotive design', 'Camera', 'Auto part'], Text: A CAMERA
+Redmi
+Redmi
+A3, Object: ['Mobile phone', 'Mobile phone']"
