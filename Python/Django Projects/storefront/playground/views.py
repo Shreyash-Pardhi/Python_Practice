@@ -22,9 +22,12 @@ def Input_IMG_features(img_path):
 
         #reading input image
         client = vision.ImageAnnotatorClient()
-        with open(img_path, "rb") as image_file:
-            content = image_file.read()
-        img = vision.Image(content=content)
+        # with open(img_path, "rb") as image_file:
+        #     content = image_file.read()
+        # img = vision.Image(content=content)
+        
+        img = vision.Image()
+        img.source.image_uri = img_path
         
         #Brand
         res_logo = client.logo_detection(img)
@@ -67,7 +70,7 @@ def check_relevent_products(inp_features):
             b_cnt = Counter(b)
 
             # convert to word-vectors
-            words  = list(a_cnt.keys() | b_cnt.keys())
+            words  = list(a_cnt.keys() & b_cnt.keys())
             a_vect = [a_cnt.get(word, 0) for word in words]       
             b_vect = [b_cnt.get(word, 0) for word in words]        
             sim = cosine_similarity([a_vect], [b_vect])
@@ -88,6 +91,11 @@ def check_relevent_products(inp_features):
 # Create your views here.
 
 def greet(req):
-    li,nam = Input_IMG_features("C:\\Users\\Microsoft\\Downloads\\iphone.png")
-    return render(req, 'index.html',{"imglink": li, "names": nam})
-
+    if req.method == 'POST':
+        uri = req.POST.get("url_Link")
+        param = "https://5.imimg.com/data5/ANDROID/Default/2021/7/VD/GM/DZ/44196072/product-jpeg-1000x1000.jpg" if(uri==None) else uri
+        li,nam = Input_IMG_features(param)
+        return render(req, 'index.html',{"imglink": li, "names": nam})
+    else:
+        return render(req, template_name='index.html')
+    

@@ -2,25 +2,81 @@
     <html>
         <title>Search Relevent Products</title>
         <style>
-            img{
-                height: 200px;
-                width: 200px;
+            h1{
+                margin-top: 60px;
+                margin-bottom: 60px;
             }
+            img{
+                height: 280px;
+                width: 280px;
+                object-fit: contain;
+                background-color: white;
+                border-radius: 20px;
+            }
+            figcaption{
+                height: 10px;
+                width: 280px;
+                text-align-last: center;
+                padding-top: 10px;
+            }
+            #searchArea{
+                margin-left: 35%;
+                margin-top: 30px;
+                margin-bottom: 60px;
+            }
+            input{
+                width: 370px;
+                height: 35px;
+                font-size: large;
+                background-color: whitesmoke;
+                size-adjust: auto;
+                border-radius: 5px;
+            }
+            button{
+                width: 80px;
+                height: 37px;
+                background-color: orange;
+                font-weight: bold;
+                border-radius: 5px;
+                border-color: bisque;
+            }
+            
+            
         </style>
         <body bgcolor="black">
             <h1 align='center' style="color: orange;">Get Relevent Products on One Click</h1>
 
+            <form action="", method="post">
+                {% csrf_token %}
+                <div id="searchArea">
+                    <input type="text" name="url_Link">
+                    <button onclick="">Search</button>
+                </div>
+            </form>
+        
 
-            <img src="{{imglink.0}}" alt="Failed To load Image">
-            <!-- <figcaption style="color: aqua;">{{names.0}}</figcaption> -->
-            <img src="{{imglink.1}}" alt="Failed To load Image">
-            <!-- <figcaption style="color: aqua;">{{names.1}}</figcaption> -->
-            <img src="{{imglink.2}}" alt="Failed To load Image">
-            <!-- <figcaption style="color: aqua;">{{names.2}}</figcaption> -->
-            <img src="{{imglink.3}}" alt="Failed To load Image">
-            <!-- <figcaption style="color: aqua;">{{names.3}}</figcaption> -->
-            <img src="{{imglink.4}}" alt="Failed To load Image">
-            <!-- <figcaption style="color: aqua;">{{names.4}}</figcaption> -->
-            
+            <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center">
+                <div>
+                    <img src="{{imglink.0}}" alt="Failed To load Image">
+                    <figcaption style="color: aqua;">{{names.0}}</figcaption>
+                </div>
+
+                <div>
+                    <img src="{{imglink.1}}" alt="Failed To load Image"> 
+                    <figcaption style="color: aqua;">{{names.1}}</figcaption>
+                </div>
+                <div>
+                    <img src="{{imglink.2}}" alt="Failed To load Image">
+                    <figcaption style="color: aqua;">{{names.2}}</figcaption>
+                </div>
+                <div>
+                    <img src="{{imglink.3}}" alt="Failed To load Image">
+                    <figcaption style="color: aqua;">{{names.3}}</figcaption>
+                </div>
+                <div>
+                    <img src="{{imglink.4}}" alt="Failed To load Image">
+                    <figcaption style="color: aqua;">{{names.4}}</figcaption>
+                </div>
+            </div>
         </body>
     </html>

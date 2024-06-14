@@ -60,15 +60,16 @@ def check_relevent_products(inp_features):
         new_df = DB
         for i in range(len(DB_features)):
             b=str(DB_features[i])
-
             #counting words in each input
             a_cnt = Counter(a)
             b_cnt = Counter(b)
+            
 
             # convert to word-vectors
-            words  = list(a_cnt.keys() | b_cnt.keys())
+            words  = list(a_cnt.keys() & b_cnt.keys())
             a_vect = [a_cnt.get(word, 0) for word in words]       
-            b_vect = [b_cnt.get(word, 0) for word in words]        
+            b_vect = [b_cnt.get(word, 0) for word in words]  
+                
             sim = cosine_similarity([a_vect], [b_vect])
 
             new_df.loc[i, "SIM"] = sim[0][0]
@@ -95,7 +96,7 @@ with gr.Blocks(title="Relevent Product Search",
                         inputs=gr.Image(label='Upload Product Image',type='filepath',height="auto"),
                         outputs= relevent_prod,
                         title="<p style='color:orange; font-size:35px'>Search Relevent Products on One Click</p><br>",
-                        allow_flagging='never',
+                        allow_flagging='never', 
                         submit_btn="Search"
                     )
 
