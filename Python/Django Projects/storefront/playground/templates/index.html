@@ -16,8 +16,10 @@
             figcaption{
                 height: 10px;
                 width: 280px;
-                text-align-last: center;
+                text-align: center;
                 padding-top: 10px;
+                padding-bottom: 41px;
+                text-wrap:balance;
             }
             #searchArea{
                 margin-left: 35%;
@@ -31,6 +33,7 @@
                 background-color: whitesmoke;
                 size-adjust: auto;
                 border-radius: 5px;
+                
             }
             button{
                 width: 80px;
@@ -39,6 +42,13 @@
                 font-weight: bold;
                 border-radius: 5px;
                 border-color: bisque;
+            }
+            .products{
+                columns: 4;
+                margin-left: 50px;
+            }
+            #oneProd{
+                padding-bottom: 20px;
             }
             
             
@@ -49,20 +59,25 @@
             <form action="", method="post">
                 {% csrf_token %}
                 <div id="searchArea">
-                    <input type="text" name="url_Link">
+                    <input type="text" name="url_Link" placeholder="Enter Product Image URL">
                     <button onclick="">Search</button>
                 </div>
             </form>
-        
 
-            <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center">
-                <div>
+            <div class="products">
+                {% for item in data%}
+                    <div id="oneProd">
+                        <img src="{{item.link}}" alt="Failed To load Image">
+                        <figcaption style="color: orange;">{{item.name}}</figcaption>
+                    </div>
+                {% endfor %}
+                <!-- <div>
                     <img src="{{imglink.0}}" alt="Failed To load Image">
                     <figcaption style="color: aqua;">{{names.0}}</figcaption>
                 </div>
 
                 <div>
-                    <img src="{{imglink.1}}" alt="Failed To load Image"> 
+                    <img src="{{imglink.1}}" alt="Failed To load Image">    
                     <figcaption style="color: aqua;">{{names.1}}</figcaption>
                 </div>
                 <div>
@@ -77,6 +92,7 @@
                     <img src="{{imglink.4}}" alt="Failed To load Image">
                     <figcaption style="color: aqua;">{{names.4}}</figcaption>
                 </div>
-            </div>
+            </div> -->
+            
         </body>
     </html>
