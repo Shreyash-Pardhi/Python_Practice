@@ -58,7 +58,6 @@ def check_relevent_products(inp_features):
         return zip(link,name)
     except Exception as e:
         gr.Warning(f"Failed to fetch relevent products, \nPlease refresh and start again...")
-        print(e)
 
 
 text = gr.Text(label="Features")
@@ -67,7 +66,7 @@ relevent_prod = gr.Gallery(columns=1,object_fit='contain',label="Relevent Produc
 
 with gr.Blocks(title="Relevent Product Search",
                css="footer {visibility: hidden}"    
-            ) as prodSearch:
+            ) as demo:
         gr.Interface(fn= Input_IMG_features,
                         inputs=gr.Image(label='Upload Product Image',type='filepath',height="auto"),
                         outputs= relevent_prod,
@@ -76,4 +75,4 @@ with gr.Blocks(title="Relevent Product Search",
                         submit_btn="Search"
                     )
 
-prodSearch.launch(debug=True)
+demo.launch(debug=True)

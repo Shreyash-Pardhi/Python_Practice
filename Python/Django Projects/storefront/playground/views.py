@@ -53,7 +53,6 @@ def check_relevent_products(inp_features):
         return link,name
     except Exception as e:
         error = "Failed to fetch relevent products, \nPlease refresh and start again..."
-        print(e)
         
 
 def is_url_image(image_url):
@@ -66,7 +65,7 @@ def is_url_image(image_url):
     except Exception as e:
         return False
 
-def greet(req):
+def releventProd(req):
     if req.method == 'POST':
         uri = req.POST.get("url_Link")
         if(uri=='' or is_url_image(uri)==False):
@@ -75,6 +74,6 @@ def greet(req):
         items = [{"link":l, "name":n} for l,n in zip(li,nam)]
         if len(li)==0:
             return render(req,'initial.html', {"erro": "No product found in dataBase, Please try again later"})
-        return render(req, 'index.html',{"imglink": li, "names": nam, "data": items})
+        return render(req, 'index.html',{"data": items})
     else:
         return render(req,'initial.html')
