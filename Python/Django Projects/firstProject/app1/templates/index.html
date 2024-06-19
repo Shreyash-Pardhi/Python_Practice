@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <h1 align="center">Welcome to Example</h1>
+
+        {% block content %}
+        <div>
+
+            {% for n in nms %}
+            <div>
+                <h5>{{n.id}} -------<a href=" {% url 'p1' n.id %} ">{{n.name}}</a> </h5>
+            </div>
+            {% endfor %}
+        </div>
+
+        
+
+
+        {%endblock content%}
+
+    </body>
+</html>

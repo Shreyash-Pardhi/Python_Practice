@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+    <html>
+        <title>Search Relevant Products</title>
+        <style>
+            h1{
+                margin-top: 60px;
+                margin-bottom: 60px;
+            }
+            img{
+                height: 280px;
+                width: 280px;
+                object-fit: contain;
+                background-color: white;
+                border-radius: 20px;
+                border: 3px solid orange;
+            }
+            figcaption{
+                height: 10px;
+                width: 280px;
+                text-align: center;
+                padding-top: 10px;
+                padding-bottom: 41px;
+                text-wrap:balance;
+                color: white;
+            }
+            input{
+                width: 370px;
+                height: 35px;
+                font-size: large;
+                background-color: whitesmoke;
+                size-adjust: auto;
+                border-radius: 5px;
+                
+            }
+            button{
+                width: 80px;
+                height: 39px;
+                margin-left: 15px;
+                background-color: orange;
+                font-weight: bold;
+                border-radius: 5px;
+                border-color: bisque;
+            }
+            .products{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            #oneProd{
+                display: flex;
+                flex-direction: column;
+                margin: 25px;
+            }
+            #searchArea{
+                margin-top: 30px;
+                margin-bottom: 60px;
+                display: flex;
+                justify-content: center;
+            }
+            body{
+                background-color: rgb(22, 22, 22);
+            }
+            
+        </style>
+        <body>
+            <h1 align='center' style="color: orange;">Get Relevent Products on One Click</h1>
+
+            <form action="", method="post">
+                {% csrf_token %}
+                <div id="searchArea">
+                    <input type="text" name="url_Link" placeholder="Enter Product Image URL">
+                    <button onclick="">Search</button>
+                </div>
+            </form>
+
+            {% block content %}
+
+            {% endblock content %}
+
+            <div class="products">
+                {% for item in data%}
+                    <div id="oneProd">
+                        <img src="{{item.link}}" alt="Failed To load Image">
+                        <figcaption>{{item.name}}</figcaption>
+                    </div>
+                {% endfor %}
+            
+        </body>
+    </html>
