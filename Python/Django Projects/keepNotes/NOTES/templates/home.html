@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Notes</title>
+    </head>
+    <style>
+        .navbar{
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+    <body>
+        <nav class="navbar">
+            <a style="padding-right: 20px;">Your Notes</a>
+            <a href="{% url 'newNote' %}">
+                <input type="submit" value="New Note">
+            </a>
+            
+        </nav>
+        <div>
+            {% block content %}
+
+            {% endblock content %}
+
+            {% for n in notes %}
+                <h4>{{n.note}}</h4>
+            {% endfor %}
+        </div>
+    </body>
+</html>

@@ -10,9 +10,12 @@
         {% block content %}
         <div>
 
-            {% for n in nms %}
+            {% for ofc in offices %}
             <div>
-                <h5>{{n.id}} -------<a href=" {% url 'p1' n.id %} ">{{n.name}}</a> </h5>
+                <span>@{{ofc.host.username}}</span>
+                <h4>{{ofc.id}} -------<a href=" {% url 'p1' ofc.id %} ">{{ofc.name}}</a> </h4>
+                <small>{{ofc.company}}</small>
+                <hr>
             </div>
             {% endfor %}
         </div>
