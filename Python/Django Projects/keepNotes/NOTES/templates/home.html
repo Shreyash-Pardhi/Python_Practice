@@ -7,9 +7,34 @@
         .navbar{
             display: flex;
             flex-direction: row;
+            padding-bottom: 10px;
+        }
+        .note{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        h4{
+            margin: 0px;
+        }
+        #deletebtn{
+            background-color: rgb(209, 3, 3);
+        }
+        .btn{
+            padding-right: 10px;
         }
     </style>
+    <!-- <script>
+        function deleteNote(){
+            var deletebtn = document.querySelector('.deletebtn');
+            var response =  confirm('Are you sure, want to delete this note?');
+            if(response==true){
+                document.getElementById("delete").submit()
+            }
+        }
+    </script> -->
     <body>
+        {% block content %}
         <nav class="navbar">
             <a style="padding-right: 20px;">Your Notes</a>
             <a href="{% url 'newNote' %}">
@@ -18,12 +43,26 @@
             
         </nav>
         <div>
-            {% block content %}
+            
 
             {% endblock content %}
 
             {% for n in notes %}
+            <div class="note">
                 <h4>{{n.note}}</h4>
+                <div>
+                    <a href="{% url 'editNote' n.id %}">
+                        <input type="submit" value="Edit Note" style="margin-right: 5px;">
+                    </a>
+                    <!-- <form method="post" action="{% url 'deleteNote' n.id%}" id="delete">
+                        {% csrf_token %} -->
+                        <a href="{% url 'deleteNote' n.id%}">
+                            <input id="deletebtn" type="submit" value="Delete Note" style="margin-left: 10px;"/>
+                        </a>
+                    <!-- </form> -->
+                </div>
+                    
+            </div>
             {% endfor %}
         </div>
     </body>

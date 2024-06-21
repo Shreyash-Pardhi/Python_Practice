@@ -1,0 +1,19 @@
+{% extends 'home.html' %}
+{% block content %}
+    <style>
+        
+    </style>
+    
+    <form method="post" action="">
+        {% csrf_token %}
+
+        <p>Are you sure you want to delete "{{no_te}}" note?</p>
+        <button>
+            <a href="{{request.META.HTTP_REFERER}}">Cancel</a>
+        </button>
+
+        <input type="submit" value="Delete" style="margin-left: 10px;">
+
+    </form>
+
+{% endblock content %}
