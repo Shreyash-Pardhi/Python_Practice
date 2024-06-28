@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+    <html>
+        <style>
+            h1{
+                margin-top: 60px;
+                margin-bottom: 60px;
+            }
+            img{
+                height: 280px;
+                width: 280px;
+                object-fit: contain;
+                background-color: white;
+                border-radius: 20px;
+                border: 3px solid orange;
+            }
+            figcaption{
+                height: 10px;
+                width: 280px;
+                text-align: center;
+                padding-top: 10px;
+                padding-bottom: 41px;
+                text-wrap:balance;
+                color: white;
+            }
+            .products{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            #oneProd{
+                display: flex;
+                flex-direction: column;
+                margin: 25px;
+            }
+            body{
+                background-color: rgb(22, 22, 22);
+            }
+            
+        </style>
+        <body>
+            <h1 align='center' style="color: orange;">All Products</h1>
+
+            <div class="products">
+                {% for item in data%}
+                    <div id="oneProd">
+                        <img src="{{item.link}}" alt="Failed To load Image">
+                        <figcaption>{{item.name}}</figcaption>
+                    </div>
+                {% endfor %}
+            
+        </body>
+    </html>
