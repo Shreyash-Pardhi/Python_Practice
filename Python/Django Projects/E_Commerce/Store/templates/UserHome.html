@@ -39,7 +39,10 @@
         </style>
         <body>
             <h1 align='center' style="color: orange;">All Products</h1>
-
+            <div style="color: white;">
+                <p>{{ request.user }}</p>
+                <a href="{% url 'logout' %}">logout</a>
+            </div>
             <div class="products">
                 {% for item in data%}
                     <div id="oneProd">

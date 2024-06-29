@@ -2,12 +2,17 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from . import forms
 from google.cloud import vision
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 import os
 import requests
 import pandas as pd
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import *
+
+
+
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Python\\Django Projects\\E_Commerce\\storage_key.json"
 
 ###################### Check Duplicate Values ######################
@@ -124,11 +129,11 @@ def addCSVfile(req):
     
     
 ###################### Get all Products from bucket ######################
+@login_required(login_url='login')
 def getAllProd(req):
     df = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
     data=[{"link":l, "name":n} for l,n in zip(df['product_url'],df['product_name'])]
-    return render(req, 'UserHome.html', {'data':data})
-    
+    return render(req, 'UserHome.html', {'data':data}) 
 
 
 ###################### User Registration ######################
@@ -139,6 +144,10 @@ def registerUSER(req):
         try:
             if form.is_valid():
                 form.save()
+                user = form.cleaned_data.get('username')
+                a = form.cleaned_data.get('is_admin')
+                print("heheheheheh: ",a)
+                messages.success(req, f'{user} Registered Successfully')
                 return redirect('login')
         except Exception as e:
             print(f"This is the Error: {e}")
@@ -154,11 +163,20 @@ def loginUSER(req):
         password = req.POST['password']
         user = authenticate(request=req, username=username, password=password)
         if user is not None:
+            login(req, user)
             if user.is_admin:
-                return HttpResponse(f'{username} is admin')
+                return render(req, 'AdminHome.html')
             else:
                 return redirect('getAllProducts')
-        else:
-            return HttpResponse('User not exist, please register')
-    else:
-        return HttpResponse('Please enter both the fields')
+                # return render(req, 'UserHome.html')
+    #     else:
+    #         return HttpResponse('User not exist, please register')
+    # else:
+    #     return HttpResponse('Please enter both the fields')
+    return render(req, 'Login.html')
+
+
+###################### User Logout ######################
+def logoutUSER(req):
+    logout(req)
+    return redirect('login')
