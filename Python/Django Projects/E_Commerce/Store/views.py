@@ -28,15 +28,15 @@ def checkDuplicateData(df:pd.DataFrame):
 
 ###################### Validating URLs ######################
 def validateURL(urlDF):
-    flag = False
     image_formats = ("image/png", "image/jpeg", "image/jpg")
     for url in urlDF:
-        r = requests.head(url)
-        if r.headers["content-type"] in image_formats:
-           flag = True
+        r = requests.head(url, timeout=5)
+        cont_type = r.headers.get('Content-Type')
+        if cont_type and 'image' in cont_type:
+           continue
         else:
             raise ValidationError(f"Invalid URL entered : {url} at Index: {list(urlDF).index(url)}")
-    return flag
+    return True
 
 ###################### Saving Data to Cloud ######################
 def addProdToCloud(df:pd.DataFrame):
@@ -75,7 +75,6 @@ def preProcessData(df:pd.DataFrame):
 
 
 ###################### Adding Single Product ######################
-@csrf_exempt
 def addSingleProd(req):
     try:
         if req.method == 'POST':
@@ -86,12 +85,11 @@ def addSingleProd(req):
                 productsDF = pd.DataFrame({'product_name':[prodName], 'product_url':[prodLink]})
                 data = preProcessData(productsDF)
                 addProdToCloud(data)
-                return HttpResponse('product Added successfully')
-            else:
-                return HttpResponse('Failed to add product')
-            
+                messages.success(req, 'Product has been added successfully')
+                return redirect('adminHome')
     except Exception as e:
-        return HttpResponse(f'Error occoured: {e}')
+        messages.error(req, f'{e}')
+        return redirect('adminHome')
 
 
 ###################### Validating CSVfile ######################
@@ -108,7 +106,7 @@ def validateCSVfile(fileCsv):
     return df
 
 ###################### Adding CSV data ######################
-@csrf_exempt
+
 def addCSVfile(req):
     try:
         if req.method == 'POST':
@@ -117,15 +115,15 @@ def addCSVfile(req):
                 df = validateCSVfile(csvFile)
                 data = preProcessData(df)
                 addProdToCloud(data)
-                return HttpResponse(f'Added CSV data')
-            else:
-                return HttpResponse(f'else part')
-    except KeyError:
-        return HttpResponse(f'Please upload a CSV file')
+                messages.success(req, 'Products in CSV added to Databese')
+                return redirect('adminHome')
+        
     except pd.errors.EmptyDataError:
-        return HttpResponse(f'Uploded CSV file is Empty')
+        messages.error(req, 'Uploded CSV file is Empty')
+        return redirect('adminHome')
     except Exception as e:
-        return HttpResponse(f"Error occoured: {e}")
+        messages.error(req, f'Error: {e}')
+        return redirect('adminHome')
     
     
 ###################### Get all Products from bucket ######################
@@ -156,7 +154,7 @@ def registerUSER(req):
 
 
 ###################### User Login ######################
-@csrf_exempt
+
 def loginUSER(req):
     if req.method == 'POST':
         username = req.POST['username']
@@ -165,14 +163,13 @@ def loginUSER(req):
         if user is not None:
             login(req, user)
             if user.is_admin:
-                return render(req, 'AdminHome.html')
+                return redirect('adminHome')
             else:
                 return redirect('getAllProducts')
                 # return render(req, 'UserHome.html')
-    #     else:
-    #         return HttpResponse('User not exist, please register')
-    # else:
-    #     return HttpResponse('Please enter both the fields')
+
+        else:
+            return messages.WARNING()
     return render(req, 'Login.html')
 
 
@@ -180,3 +177,9 @@ def loginUSER(req):
 def logoutUSER(req):
     logout(req)
     return redirect('login')
+
+
+###################### Admin Page ######################
+@login_required(login_url='login')
+def adminUser(req):
+    return render(req, 'AdminHome.html')

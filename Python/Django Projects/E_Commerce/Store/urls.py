@@ -5,6 +5,8 @@ urlpatterns = [
     path('register/', views.registerUSER, name='register'),
     path('login/', views.loginUSER, name='login'),
     path('logout/', views.logoutUSER, name='logout'),
+    
+    path('adminHome/', views.adminUser, name = 'adminHome'),
 
     path('addProduct/', views.addSingleProd, name='addSingleProd'),
     path('addProductFile/', views.addCSVfile, name='addCSVfile'),

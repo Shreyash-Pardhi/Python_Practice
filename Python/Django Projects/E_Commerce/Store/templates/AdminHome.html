@@ -1,10 +1,11 @@
 <html lang="en">
 <head>
     <title>Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <style>
     body{
-        background-color: rgb(22, 22, 22);
+        background-color: rgb(43, 43, 43);
     }
     .nav-elements{
             display: flex;
@@ -12,27 +13,123 @@
             align-items: center;
             margin-left: 20px;
             margin-right: 20px;
-        }
+    }
     .navbar-main{
             background-color: orange;
+            height: 50px;
             border-radius: 10px;
-        }
-
-    p, a{
+            padding-top: 10px;
+            margin: 8px 6px;
+    }
+    a{
             font-size: large;
             font-weight: bold;
-        }
+    }
+    .container-form {
+        margin-top: 100px;
+    }
+    .card {
+        width: 580px;
+        height: 380px;
+		margin-top: auto;
+		margin-bottom: auto;
+		background: black;
+		position: relative;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		padding: 10px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		border-radius: 5px;
+        margin-inline: auto;
+    }
+    .btn-primary {
+        width: 50%;
+        background: orange !important;
+        color: white !important;
+    }
+    .btn-primary:focus {
+        box-shadow: none !important;
+        outline: 0px !important;
+    }
+    .col-md-6{
+        display: flex;
+        justify-content: space-between;
+    }
+    h3{
+        color: orange;
+        text-align: center;
+        font-size: 1.75rem;
+    }
+    .main-div{
+        display: flex;
+    }
 
 </style>
 <body>
     <nav class="navbar-main">
         <div class="nav-elements">
-            <p>Hii, {{ request.user }}</p>
+            <a>Hii, {{ request.user }}</a>
             <div>
                 <a href="{% url 'getAllProducts' %}">All Products</a>
                 <a href="{% url 'logout' %}", style="margin-left: 30px;">logout</a>
             </div>
         </div>
     </nav>
+
+    {% for msg in messages %}
+        <div class="alert-msg" role="alert" style="color: white;">
+            <strong>Hey!</strong> {{msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    <div class="container-form h-100">
+        <div class="main-div">
+            <!-- <div class="col-md-6"> -->
+                
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>Add Product</h3>
+                    </div>
+                    <div class="card-body" align='center'>
+                        <form action="{% url 'addSingleProd' %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" name="prodName" id="productName" class="form-control" placeholder="Product Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="prodLink" id="imageUrl" class="form-control" placeholder="Product URL" required>
+                            </div>
+                            <div class="d-flex justify-content-center mt-3 login_container">
+                                <input class="btn btn-primary" type="submit" value="Add Product">
+                              </div>
+                           
+                        </form>
+                       
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>Upload Product CSV</h3>
+                    </div>
+                    <div class="card-body" align='center'>
+                        <form action="{% url 'addCSVfile' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="file" name="csvFile" class="form-control" accept=".csv" required>
+                            </div>
+                            <div class="d-flex justify-content-center mt-3 login_container">
+                                <input class="btn btn-primary" type="submit" value="Upload Products">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            <!-- </div> -->
+        </div>
+    </div>    
 </body>
 </html>
