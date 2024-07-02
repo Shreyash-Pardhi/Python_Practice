@@ -86,6 +86,7 @@
 				</div>
 				<div class="d-flex justify-content-center form_container">
 					<form method="POST" action="">
+						{% csrf_token %}
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -105,8 +106,10 @@
 					</form>
 
 				</div>
-
-                <div style="color: red;">{{ form.errors }}</div>
+				
+				{% for msg in messages %}
+                	<div style="color: red; margin: 10px; text-align:center;">{{ msg }}</div>
+				{% endfor %}
 		
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links" style="color: rgb(129, 129, 129);">
