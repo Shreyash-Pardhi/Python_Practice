@@ -136,6 +136,14 @@ def getAllProd(req):
     df = pd.read_csv("gs://bucket-shreyash/Product_Data/ProductDEMO.csv")
     df = df[::-1]
     data=[{"link":l, "name":n} for l,n in zip(df['product_url'],df['product_name'])]
+    if req.method == 'POST':
+        query = str(req.POST['search_txt']).lower()
+        if df['product_name'].str.lower().str.contains(query).any():
+            name = df[df['product_name'].str.lower().str.contains(query)]['product_name'].tolist()
+            url = df[df['product_name'].str.lower().str.contains(query)]['product_url'].tolist()
+            data=[{"link":l, "name":n} for l,n in zip(url, name)]
+        else:
+            return HttpResponse('Product not found')
     return render(req, 'UserHome.html', {'data':data}) 
 
 
@@ -195,13 +203,18 @@ def adminUser(req):
         return HttpResponse('Page not found')
 
 
-def searchProduct(req):
-    if req.method == 'POST':
-        query = str(req.POST['search_txt']).lower()
-        df = pd.read_csv("gs://bucket-shreyash/Product_Data/ProductDEMO.csv")
-        if df['product_name'].map(lambda x: x.lower()).str.contains(query).any():
-            name = df[df['product_name'].str.contains(query)]['product_name'].tolist()
-            link = df[df['product_name'].str.contains(query)]['product_url'].tolist()
-        data=[{"link":l, "name":n} for l,n in zip(link, name)]
-        print(name)
-    return redirect('getAllProducts')
+# def searchProduct(req):
+#     if req.method == 'POST':
+#         query = str(req.POST['search_txt']).lower()
+#         df = pd.read_csv("gs://bucket-shreyash/Product_Data/ProductDEMO.csv")
+#         if df['product_name'].str.lower().str.contains(query).any():
+#             name = df[df['product_name'].str.lower().str.contains(query)]['product_name'].tolist()
+#             url = df[df['product_name'].str.lower().str.contains(query)]['product_url'].tolist()
+#             data=[{"link":l, "name":n} for l,n in zip(url, name)]
+#             return render(req, 'UserHome.html', {'data':data})
+#         else:
+#             pass
+#     return redirect('getAllProducts')
+
+def searchByImage(req):
+    return redirect('http://127.0.0.1:7860/')

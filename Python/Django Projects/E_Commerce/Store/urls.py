@@ -11,6 +11,7 @@ urlpatterns = [
     path('addProduct/', views.addSingleProd, name='addSingleProd'),
     path('addProductFile/', views.addCSVfile, name='addCSVfile'),
     path('getAllProducts/', views.getAllProd, name='getAllProducts'),
-    path('searchProd/', views.searchProduct, name='searchProd')
+    # path('searchProd/', views.searchProduct, name='searchProd')
+    path('imageSearch/', views.searchByImage, name='imageSearch')
     
 ]

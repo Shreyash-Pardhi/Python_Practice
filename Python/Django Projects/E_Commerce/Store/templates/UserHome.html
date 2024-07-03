@@ -100,7 +100,7 @@
                     
                     <a>Hii, <strong>{{ request.user }}</strong></a>
                     <div class="right-nav">
-                        <form action="{% url 'searchProd' %}" method="post">
+                        <form action="{% url 'getAllProducts' %}" method="post">
                             {% csrf_token %}
                             <div class="search-bar">
                                 <input type="search" name="search_txt" placeholder="Search" class="search-input" required>
@@ -111,7 +111,7 @@
                                 </button>
                             </div>
                         </form>
-
+                        <a href="{% url 'imageSearch' %}" style="margin-left: 30px;">Image Search</a>
                         <a href="{% url 'logout' %}" style="margin-left: 30px;">logout</a>
                     </div>
                 </div>
