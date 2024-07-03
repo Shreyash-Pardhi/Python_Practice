@@ -4,6 +4,7 @@ from . import forms
 from google.cloud import vision
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
 from django.contrib import messages
 import os
 import requests
@@ -129,6 +130,7 @@ def addCSVfile(req):
     
     
 ###################### Get all Products from bucket ######################
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url='login')
 def getAllProd(req):
     df = pd.read_csv("gs://bucket-shreyash/Product_Data/ProductDEMO.csv")
@@ -183,6 +185,7 @@ def logoutUSER(req):
 
 
 ###################### Admin Page ######################
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url='login')
 def adminUser(req):
     if req.user.is_admin:
@@ -190,3 +193,15 @@ def adminUser(req):
         return render(req, 'AdminHome.html')
     else:
         return HttpResponse('Page not found')
+
+
+def searchProduct(req):
+    if req.method == 'POST':
+        query = str(req.POST['search_txt']).lower()
+        df = pd.read_csv("gs://bucket-shreyash/Product_Data/ProductDEMO.csv")
+        if df['product_name'].map(lambda x: x.lower()).str.contains(query).any():
+            name = df[df['product_name'].str.contains(query)]['product_name'].tolist()
+            link = df[df['product_name'].str.contains(query)]['product_url'].tolist()
+        data=[{"link":l, "name":n} for l,n in zip(link, name)]
+        print(name)
+    return redirect('getAllProducts')

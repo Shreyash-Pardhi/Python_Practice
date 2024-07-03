@@ -1,0 +1,13 @@
+{% block searchedProducts %}
+
+<h1 align='center' style="color: orange;">All Products</h1>
+            
+<div class="products">
+    {% for item in data%}
+        <div id="oneProd">
+            <img src="{{item.link}}" alt="Failed To load Image">
+            <figcaption>{{item.name}}</figcaption>
+        </div>
+    {% endfor %}
+
+{% endblock %}
