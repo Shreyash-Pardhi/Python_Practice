@@ -11,6 +11,7 @@ import requests
 import pandas as pd
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import *
+import concurrent.futures
 
 
 
@@ -24,12 +25,11 @@ def checkDuplicateData(df:pd.DataFrame):
         if dup[i] == True:
             index.append(i+1)
     if(len(index)!=0):
-        raise ValidationError(f"Product already present, Duplicated products are at rows: {index}")
+        raise ValidationError(f"Product(s) already present, please recheck your inventory")
     return True
 
 ###################### Validating URLs ######################
 def validateURL(urlDF):
-    image_formats = ("image/png", "image/jpeg", "image/jpg")
     for url in urlDF:
         r = requests.head(url, timeout=5)
         cont_type = r.headers.get('Content-Type')
@@ -41,40 +41,38 @@ def validateURL(urlDF):
 
 ###################### Saving Data to Cloud ######################
 def addProdToCloud(df:pd.DataFrame):
-    DB = pd.read_csv("gs://bucket-shreyash/Product_Data/ProductDEMO.csv")
+    DB = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
     finalDF = pd.concat([DB, df], ignore_index=True)
     checkDuplicateData(finalDF)
-    finalDF.to_csv("gs://bucket-shreyash/Product_Data/ProductDEMO.csv",index=False)
+    finalDF.to_csv("gs://bucket-shreyash/Product_Data/Product_D.csv",index=False)
     
 ###################### Detecting Object from imageURL ######################
-# def featureExtraction(uri):
-#     txt = ''
-#     client = vision.ImageAnnotatorClient()
-#     img = vision.Image()
-#     img.source.image_uri = uri
+def featureExtraction(uri):
+    txt = ''
+    client = vision.ImageAnnotatorClient()
+    img = vision.Image()
+    img.source.image_uri = uri
     
-#     res_label = client.label_detection(img)
-#     labels = res_label.label_annotations
-#     label = [lab.description for lab in labels]
+    res_label = client.label_detection(img)
+    labels = res_label.label_annotations
+    label = [lab.description for lab in labels]
     
-#     #for objects
-#     objects = client.object_localization(image=img).localized_object_annotations
-#     obj = [ob.name for ob in objects]
-#     txt = txt + f"{label}" if len(obj)==0 else txt + f"{obj}"
-#     return txt
+    #for objects
+    objects = client.object_localization(image=img).localized_object_annotations
+    obj = [ob.name for ob in objects]
+    txt = txt + f"{label}" if len(obj)==0 else txt + f"{obj}"
+    return txt
 
 ###################### Precessing Data ######################
 def preProcessData(df:pd.DataFrame):
     dfURL = df['product_url']
-    if(validateURL(dfURL)==True):
-        # for i in range(len(dfURL)):
-        #     txt = featureExtraction(dfURL[i])
-        #     df.loc[i, "objects_extracted"] = txt
-        # return df
-        checkDuplicateData(df)
-        return df
-    else:
-        raise ValidationError("pre processing problem")
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        results = executor.map(featureExtraction, dfURL)
+    fea = [r for r in results]
+    for i in range(len(fea)):
+        df.loc[i, "objects_extracted"] = fea[i]
+    return df
+    
 
 
 ###################### Adding Single Product ######################
@@ -86,6 +84,7 @@ def addSingleProd(req):
 
             if prodName and prodLink:
                 productsDF = pd.DataFrame({'product_name':[prodName], 'product_url':[prodLink]})
+                validateURL(productsDF['product_url'])
                 data = preProcessData(productsDF)
                 addProdToCloud(data)
                 messages.success(req, 'Product has been added successfully')
@@ -116,8 +115,8 @@ def addCSVfile(req):
             csvFile = req.FILES['csvFile']
             if csvFile:
                 df = validateCSVfile(csvFile)
-                # data = preProcessData(df)
-                addProdToCloud(df)
+                data = preProcessData(df)
+                addProdToCloud(data)
                 messages.success(req, 'Products in CSV added to Databese')
                 return redirect('adminHome')
         
@@ -133,7 +132,7 @@ def addCSVfile(req):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url='login')
 def getAllProd(req):
-    df = pd.read_csv("gs://bucket-shreyash/Product_Data/ProductDEMO.csv")
+    df = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
     df = df[::-1]
     data=[{"link":l, "name":n} for l,n in zip(df['product_url'],df['product_name'])]
     if req.method == 'POST':
@@ -143,7 +142,8 @@ def getAllProd(req):
             url = df[df['product_name'].str.lower().str.contains(query)]['product_url'].tolist()
             data=[{"link":l, "name":n} for l,n in zip(url, name)]
         else:
-            return HttpResponse('Product not found')
+            messages.success(req, "Sorry, We didn't found the product you are looking for...")
+            return redirect('getAllProducts')
     return render(req, 'UserHome.html', {'data':data}) 
 
 
@@ -215,6 +215,7 @@ def adminUser(req):
 #         else:
 #             pass
 #     return redirect('getAllProducts')
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='login')
 def searchByImage(req):
     return redirect('http://127.0.0.1:7860/')

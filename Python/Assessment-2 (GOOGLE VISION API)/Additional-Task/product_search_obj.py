@@ -6,7 +6,7 @@ import ast
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Python\\Assessment-2 (GOOGLE VISION API)\\Additional-Task\\storage_key.json"
 
 #Reading Data From Google Cloud Bucket CSV
-DB = pd.read_csv("gs://bucket-shreyash/Product_Data/Products_v2.csv")
+DB = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
 
 #features Present in database csv file
 DB_features = DB['objects_extracted']
