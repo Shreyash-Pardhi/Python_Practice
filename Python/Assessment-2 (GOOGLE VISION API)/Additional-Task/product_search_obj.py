@@ -5,11 +5,7 @@ import pandas as pd
 import ast
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Python\\Assessment-2 (GOOGLE VISION API)\\Additional-Task\\storage_key.json"
 
-#Reading Data From Google Cloud Bucket CSV
-DB = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
 
-#features Present in database csv file
-DB_features = DB['objects_extracted']
 
 #Extracting features from input image
 def Input_IMG_features(img_path):
@@ -42,6 +38,12 @@ def Input_IMG_features(img_path):
 
 def check_relevent_products(inp_features):
     try: 
+        #Reading Data From Google Cloud Bucket CSV
+        DB = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
+
+        #features Present in database csv file
+        DB_features = DB['objects_extracted']
+        
         name = []
         link = []
         inp_features = set(ast.literal_eval(inp_features))
