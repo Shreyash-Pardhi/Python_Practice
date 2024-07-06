@@ -1,39 +1,32 @@
-// loader.js
-document.addEventListener("DOMContentLoaded", function() {
-    var loader = document.getElementById('wheel-and-hamster');
-    var body = document.getElementById('ad')
 
-    function showLoader() {
-        loader.style.display = 'normal';
-        body.style.display = 'none'; // Hide content
-    }
+// Function to show the loading screen
+function showLoading() {
+    document.querySelector('.loading-overlay').style.display = 'flex';
+    document.querySelector('#base-content').classList.add('blurred');
+}
 
-    function hideLoader() {
-        loader.style.display = 'none';
-        body.style.display = 'block'; // Show content
-    }
+// Function to hide the loading screen
+function hideLoading() {
+    document.querySelector('.loading-overlay').style.display = 'none';
+    document.querySelector('#base-content').classList.remove('blurred');
+}
 
-    // Show loader on link click
-    document.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            if (link.getAttribute('href') !== '#') {
-                showLoader();
+// Add event listener to forms and links for showing loading screen
+document.addEventListener('DOMContentLoaded', function () {
+    // Show loading on form submit
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', showLoading);
+    });
+
+    // Show loading on link click
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function (event) {
+            if (link.getAttribute('target') !== '_blank') {
+                showLoading();
             }
         });
     });
 
-    // Show loader on form submit
-    document.querySelectorAll('form').forEach(function(form) {
-        form.addEventListener('submit', function(event) {
-            showLoader();
-        });
-    });
-
-    // Hide loader when the page is fully loaded
-    window.addEventListener('load', function() {
-        hideLoader();
-    });
-
-    // Initially show the loader and hide the body content
-    showLoader();
+    // showLoading();
+    // window.addEventListener('load', hideLoading);
 });
