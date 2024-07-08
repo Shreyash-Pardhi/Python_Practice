@@ -9,7 +9,6 @@ from django.contrib import messages
 import os
 import requests
 import pandas as pd
-from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import *
 import concurrent.futures
 
@@ -48,7 +47,7 @@ def addProdToCloud(df:pd.DataFrame):
     
 ###################### Detecting Object from imageURL ######################
 def featureExtraction(uri):
-    txt = ''
+    # txt = ''
     client = vision.ImageAnnotatorClient()
     img = vision.Image()
     img.source.image_uri = uri
@@ -60,8 +59,9 @@ def featureExtraction(uri):
     #for objects
     objects = client.object_localization(image=img).localized_object_annotations
     obj = [ob.name for ob in objects]
-    txt = txt + f"{label}" if len(obj)==0 else txt + f"{obj}"
-    return txt
+    # txt = txt + f"{label}" if len(obj)==0 else txt + f"{obj[:3]}"
+    txt = list(set(obj).intersection(label)) if set(obj).intersection(label) else label[:2] if len(obj) == 0 else set(obj)
+    return str(txt)
 
 ###################### Precessing Data ######################
 def preProcessData(df:pd.DataFrame):
@@ -132,6 +132,7 @@ def addCSVfile(req):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url='login')
 def getAllProd(req):
+    search_title = 'All Products'
     df = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
     df = df[::-1]
     data=[{"link":l, "name":n} for l,n in zip(df['product_url'],df['product_name'])]
@@ -141,10 +142,11 @@ def getAllProd(req):
             name = df[df['product_name'].str.lower().str.contains(query)]['product_name'].tolist()
             url = df[df['product_name'].str.lower().str.contains(query)]['product_url'].tolist()
             data=[{"link":l, "name":n} for l,n in zip(url, name)]
+            search_title = query.capitalize()
         else:
             messages.success(req, "Sorry, We didn't found the product you are looking for...")
             return redirect('getAllProducts')
-    return render(req, 'UserHome.html', {'data':data}) 
+    return render(req, 'UserHome.html', {'data':data, 'search_title': search_title}) 
 
 
 ###################### User Registration ######################

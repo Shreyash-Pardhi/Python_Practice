@@ -1,3 +1,1 @@
- ",logo)
-    # print("Texts : ",text[0])
-    # print("Landmar
+list(set(obj).intersection(label)) if set(obj).intersection(label) else label[:2]
