@@ -64,7 +64,7 @@ def check_relevent_products(inp_features):
 
 
 
-relevent_prod = gr.Gallery(columns=[4],object_fit='contain',label='Relevent Products',height="fit-content",visible=True,container=False)
+relevent_prod = gr.Gallery(columns=[4],object_fit='contain',label='Relevent Products',height="fit-content",container=False, elem_id='gl',visible=True)
 
 with gr.Blocks(title="Relevent Product Search",
                css="footer {visibility: hidden}"    
@@ -75,6 +75,7 @@ with gr.Blocks(title="Relevent Product Search",
                         outputs= relevent_prod,
                         allow_flagging='never', 
                         submit_btn="Search"
+                        
                     )
         
         gr.HTML("""
@@ -98,6 +99,9 @@ with gr.Blocks(title="Relevent Product Search",
             }
             .grid-wrap svelte-hpz95u fixed-height{
                 height:100%
+            }
+            .lg.svelte-cmf5ev {
+                width: 250px;
             }
         </style>
         """)
