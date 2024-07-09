@@ -21,8 +21,7 @@ def detect_obj(uri):
     txt = ''
     txt= list(set(obj).intersection(label)) if set(obj).intersection(label) else label[:2] if len(obj) == 0 else obj
     t = str(txt)
-    print(type(t))
     return t
     
 
-print(detect_obj("https://m.media-amazon.com/images/I/316ArzLeJ2L._SY445_SX342_QL70_FMwebp_.jpg"))
+print(detect_obj("https://m.media-amazon.com/images/I/61373tSdppL._AC_UY218_.jpg"))

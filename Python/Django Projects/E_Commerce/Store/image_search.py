@@ -3,8 +3,8 @@ from google.cloud import vision
 import os
 import pandas as pd
 import ast
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Python\\Assessment-2 (GOOGLE VISION API)\\Additional-Task\\storage_key.json"
 
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Python\\Django Projects\\E_Commerce\\storage_key.json"
 
 
 #Extracting features from input image
@@ -57,14 +57,14 @@ def check_relevent_products(inp_features):
         if(len(link)==0):
             gr.Warning(f"No product found in dataBase, \nPlease try again later")
         
+        
         return zip(link,name)
     except Exception as e:
         gr.Warning(f"Failed to fetch relevent products, \nPlease refresh and start again...")
 
 
-text = gr.Text(label="Features")
-relevent_prod = gr.Gallery(columns=1,object_fit='contain',label="Relevent Products",height=600)
 
+relevent_prod = gr.Gallery(columns=[4],object_fit='contain',label='Relevent Products',height="fit-content",visible=True,container=False)
 
 with gr.Blocks(title="Relevent Product Search",
                css="footer {visibility: hidden}"    
@@ -73,15 +73,31 @@ with gr.Blocks(title="Relevent Product Search",
         gr.Interface(fn= Input_IMG_features,
                         inputs=gr.Image(label='Upload Product Image',type='filepath',height="auto"),
                         outputs= relevent_prod,
-                        title="<p style='color:orange; font-size:35px'>Search Relevent Products on One Click</p><br>",
                         allow_flagging='never', 
                         submit_btn="Search"
                     )
         
         gr.HTML("""
         <style>
+            h1{
+                margin-bottom:5px;
+            }
             img{
                 background-color: white;
+                height:300px;
+            }
+            .unequal-height.svelte-sa48pu{
+                display: flex;
+                align-items:center;
+                position: relative;
+                flex-direction: column;
+            }
+            .svelte-vt1mxs.gap.panel{
+                width: auto;
+                margin-bottom:40px;
+            }
+            .grid-wrap svelte-hpz95u fixed-height{
+                height:100%
             }
         </style>
         """)
