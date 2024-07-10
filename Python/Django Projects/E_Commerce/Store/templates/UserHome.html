@@ -30,12 +30,14 @@
 
     figcaption {
         height: 10px;
-        width: 280px;
+        width: 250px;
         text-align: center;
         padding-top: 10px;
         padding-bottom: 41px;
-        text-wrap: balance;
+        text-overflow: ellipsis;
         color: white;
+        overflow: hidden !important;
+        white-space: nowrap;
     }
 
     .products {
@@ -48,6 +50,7 @@
         display: flex;
         flex-direction: column;
         margin: 25px;
+        align-items: center;
     }
 
     body {
@@ -198,7 +201,7 @@
             {% endfor %}
         </div>
     </div>
-    
+
     {% load static %}
     <script src="{% static 'loader.js' %}"></script>
 </body>

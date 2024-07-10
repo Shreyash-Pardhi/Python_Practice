@@ -24,4 +24,4 @@ def detect_obj(uri):
     return t
     
 
-print(detect_obj("https://m.media-amazon.com/images/I/61373tSdppL._AC_UY218_.jpg"))
+print(detect_obj("https://m.media-amazon.com/images/I/71l6+lxzbTL._AC_UL640_QL65_.jpg"))
