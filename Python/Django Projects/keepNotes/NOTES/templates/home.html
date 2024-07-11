@@ -3,114 +3,136 @@
 
 <head>
     <title>Notes</title>
-</head>
-<style>
-    body {
-        background-color: black;
-    }
 
-    .navbar {
-        display: flex;
-        margin-bottom: 20px;
-        background-color: orange;
-        padding: 15px 30px;
-        border-radius: 10px;
-        justify-content: space-between;
-    }
+    <style>
+        body {
+            background-color: black;
+        }
 
-    .note {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        background-color: rgb(43, 43, 43);
-        margin: 10px 20px;
-        border-radius: 15px;
-        border: 1px solid orange;
-    }
+        .navbar {
+            display: flex;
+            margin-bottom: 20px;
+            background-color: orange;
+            padding: 15px 30px;
+            border-radius: 10px;
+            justify-content: space-between;
+        }
 
-    h4 {
-        margin: 0px;
-        color: white;
-    }
+        .note {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: rgba(43, 43, 43, 0.726);
+            margin: 10px 20px;
+            border-radius: 15px;
+            border: 1px solid orange;
+        }
 
-    #deletebtn {
-        background-color: rgb(209, 3, 3);
-    }
+        h4 {
+            margin: 0px;
+            color: white;
+        }
 
-    .btn {
-        padding-right: 10px;
-    }
+        #deletebtn {
+            background-color: rgb(209, 3, 3);
+        }
 
-    #headline {
-        font-weight: 500;
-        font-size: 25px;
-        font-family: fantasy;
-    }
+        .btn {
+            padding-right: 10px;
+        }
 
-    .note-text {
-        color: white;
-        display: -webkit-box;
+        #headline {
+            font-weight: 500;
+            font-size: 25px;
+            font-family: fantasy;
+        }
+
+        .note-text {
+            color: white;
+            /*display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
-        line-clamp: 2;
-        font-size: larger;
-        max-width: 800px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-</style>
+        line-clamp: 2;*/
+            font-size: larger;
+            max-width: 800px;
+            /*overflow: hidden;
+        text-overflow: ellipsis;*/
+            align-self: center;
+        }
+
+        #addingNote {
+            background-color: orange;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
 
 <body>
-    {% block content %}
-    <nav class="navbar">
-        <a id="headline">Your Notes</a>
+    {% include 'newNote.html' %}
 
-        <div class="rightSide">
-            <a href="{% url 'newNote' %}" title="Add New Note">
+    {% include 'deleteNote.html' %}
 
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
-                    class="bi bi-plus-square-fill" viewBox="0 0 16 16" style="color:black; height:30px; width:34px;">
-                    <path
-                        d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0" />
-                </svg>
-            </a>
-        </div>
-    </nav>
+    <div class="mainDIV">
+        <nav class="navbar">
+            <a id="headline">Your Notes</a>
 
-    <div>
-        {% endblock content %}
-
-        {% for n in notes %}
-        <div class="note">
-            <div class="note-text">
-                {{n.note}}
-            </div>
-
-            <div>
-                <a href="{% url 'editNote' n.id %}" title="Edit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-pencil-square" viewBox="0 0 16 16"
-                        style="color:green; height:30px; width:36px; margin-right:20px">
+            <div class="rightSide">
+                <button id="addingNote">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                        class="bi bi-plus-square-fill" viewBox="0 0 16 16"
+                        style="color:black; height:30px; width:34px;">
                         <path
-                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                        <path fill-rule="evenodd"
-                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0" />
                     </svg>
-                </a>
-
-                <a href="{% url 'deleteNote' n.id%}" title="Delete">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-trash3-fill" viewBox="0 0 16 16"
-                        style="color:red; height:28px; width:36px; margin-bottom:1px">
-                        <path
-                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
-                    </svg>
-                </a>
+                </button>
             </div>
+        </nav>
 
+        <div>
+
+            {% for n in notes %}
+            <div class="note">
+                <div class="note-text">
+                    {{n.note}}
+                </div>
+
+                <div style="align-content: center;">
+                    <a href="{% url 'editNote' n.id %}" title="Edit" id="editNote">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil-square" viewBox="0 0 16 16"
+                            style="color:green; height:30px; width:36px; margin-right:20px">
+                            <path
+                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd"
+                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                        </svg>
+                    </a>
+
+                    <a href="{% url 'deleteNote' n.id%}" title="Delete">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-trash3-fill" viewBox="0 0 16 16"
+                            style="color:red; height:28px; width:36px; margin-bottom:1px">
+                            <path
+                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
+    <script>
+        document.getElementById("addingNote").addEventListener("click", function () {
+            document.querySelector(".addAndEditNote").style.display = "flex";
+        })
+
+        document.querySelector(".close").addEventListener("click", function () {
+            document.querySelector(".addAndEditNote").style.display = "none";
+        })
+    </script>
 </body>
 
 </html>

@@ -4,7 +4,8 @@ from .forms import NoteFrom
 # Create your views here.
 def home(req):
     notes = Notes.objects.all()
-    data = {"notes":notes}
+    form = NoteFrom
+    data = {"notes":notes, "form":form}
     return render(req, 'home.html', data)
 
 def newNote(req):
@@ -12,10 +13,11 @@ def newNote(req):
     if req.method == 'POST':
         form = NoteFrom(req.POST)
         if form.is_valid:
+            temp = form.save(commit=False)
+            temp.user = req.user
             form.save()
             return redirect('home')
-        
-    data = {'form':form}
+    data = {'form':form, 'form_action':'newNote'}
     return render(req, 'newNote.html', data)
 
 def editNote(req, _id):
@@ -24,9 +26,11 @@ def editNote(req, _id):
     if req.method == 'POST':
         form = NoteFrom(req.POST, instance=note)
         if form.is_valid:
+            temp = form.save(commit=False)
+            temp.user = req.user
             form.save()
             return redirect('home')
-    data = {'form':form}
+    data = {'form':form, 'form_action':'editNote'}
     return render(req, 'newNote.html', data)
 
 def deleteNote(req, _id):
