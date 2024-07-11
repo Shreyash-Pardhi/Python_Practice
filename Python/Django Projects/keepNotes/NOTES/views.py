@@ -38,6 +38,6 @@ def deleteNote(req, _id):
     if(req.method == 'POST'):
         note.delete()
         return redirect('home')
-    return render(req, 'deleteNote.html', {'no_te':note})
+    return render(req, 'deleteNote.html', {'note':note})
         
         
