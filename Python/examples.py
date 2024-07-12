@@ -1,56 +1,70 @@
 import pandas as pd
 from google.cloud import vision
 import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Python\\Assessment-2 (GOOGLE VISION API)\\storage_key.json"
 import concurrent.futures
 
-import requests
-def is_url_image(url):
-   response = requests.head(url)  # Use HEAD request to check headers only
-   content_type = response.headers.get('Content-Type')
-   if content_type and 'image' in content_type:
-      return True
-   else:
-      return False
-  
-sam = pd.read_csv('D:\\Work and Assignments\\Python\\sampleCSV.csv')
-s_uri = sam['product_url'].tolist()
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Python\\Assessment-2 (GOOGLE VISION API)\\storage_key.json"
 
+def get_image_labels(image_path):
+    """Get labels detected in an image using Google Vision API."""
+    client = vision.ImageAnnotatorClient()
+    img = vision.Image()
+    img.source.image_uri = image_path
+    
+    response = client.label_detection(image=img)
+    labels = response.label_annotations
+    
+    return labels
 
-def extract_info(uri):
-        txt = ''
-        if(is_url_image(uri)==True):
-            client = vision.ImageAnnotatorClient()
-            img = vision.Image()
-            img.source.image_uri = uri
-            
-            res_label = client.label_detection(img)
-            labels = res_label.label_annotations
-            label = [lab.description for lab in labels]
-            
-            objects = client.object_localization(image=img).localized_object_annotations
-            obj = [ob.name for ob in objects]
-            txt = txt + f"{label}" if len(obj)==0 else txt + f"{obj}"
-        
-        else:
-           txt = "Invalid"
-        return txt
+def compare_labels(base_labels, target_labels):
+    """Compare labels between two images and return a similarity score."""
+    base_labels_set = {label.description for label in base_labels}
+    target_labels_set = {label.description for label in target_labels}
+    
+    intersection = base_labels_set.intersection(target_labels_set)
+    union = base_labels_set.union(target_labels_set)
+    
+    if not union:
+        return 0.0
+    return len(intersection) / len(union)
 
-res = sam
+def compare_images(base_image_path, image_dict):
+    """Compare a base image with a dictionary of images using label detection."""
+    base_labels = get_image_labels(base_image_path)
+    scores = []
+    
+    for pname, image_path in image_dict.items():
+        target_labels = get_image_labels(image_path)
+        score = compare_labels(base_labels, target_labels)
+        scores.append((pname, image_path, score))
+    
+    # Sort images by similarity score in descending order
+    scores.sort(key=lambda x: x[2], reverse=True)
+    
+    # Print similarity scores
+    for pname, image_path, score in scores:
+        print(f"Image Name: {pname}, Image Path: {image_path}, Similarity Score: {score:.2f}")
 
-def my():
-    #if __name__ == '__main__':
-        # Use ProcessPoolExecutor to execute the function in parallel
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            results = executor.map(extract_info, s_uri)
+    return scores
 
-        # Print the results after they are computed
-        fea = [r for r in results]
-        # for r in results:
-        #     fea.append(r)
+# Base image path
+base_image_path = 'path/to/base/image.jpg'
 
-        for i in range(len(fea)):
-            res.loc[i, "objects_extracted"] = fea[i]
-        
-        print(res)
-my()
+# Dictionary of image names and paths to compare with
+image_dict = {
+    'Image 1': 'https://m.media-amazon.com/images/I/61C+Y9zoAQL._SY695_.jpg',
+    'Image 2': 'https://m.media-amazon.com/images/I/71YG7EClYfL._SX679_.jpg',
+    'Image 3': 'https://m.media-amazon.com/images/I/81ATe15IyHL._SX695_.jpg',
+    'Image 4': 'https://m.media-amazon.com/images/I/71xWtLhH2GL._SX695_.jpg',
+    'Image 5': 'https://m.media-amazon.com/images/I/61OBcY37KXL._SY695_.jpg',
+    'Image 6': 'https://m.media-amazon.com/images/I/710+f7XX2FL._SY695_.jpg',
+    'Image 7': 'https://m.media-amazon.com/images/I/71u2XOFXAIL._SX695_.jpg',
+    'Image 8': 'https://m.media-amazon.com/images/I/61U0BBQYhrL._SY695_.jpg',
+}
+
+# Compare the base image with the dictionary of images
+results = compare_images('https://m.media-amazon.com/images/I/71YG7EClYfL._SX679_.jpg', image_dict)
+
+# Print results
+for pname, image_path, score in results:
+    print(f"Image Name: {pname}, Image Path: {image_path}, Similarity Score: {score:.2f}")

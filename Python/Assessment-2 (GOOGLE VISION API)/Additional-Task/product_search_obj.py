@@ -10,6 +10,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Python
 #Extracting features from input image
 def Input_IMG_features(img_path):
     txt=''
+    l=''
     try:
         if(img_path == None):
             gr.Warning("Please upload a Image")
@@ -25,7 +26,7 @@ def Input_IMG_features(img_path):
         res_label = client.label_detection(img)
         labels = res_label.label_annotations
         label = [lab.description for lab in labels]
-        
+        l+=f"{label}"
         #for objects
         objects = client.object_localization(image=img).localized_object_annotations
         obj = [ob.name for ob in objects]
@@ -34,25 +35,36 @@ def Input_IMG_features(img_path):
     except Exception as e:
         gr.Warning(f"Something happened!!!, \nPlease refresh and start again...")
     
-    return check_relevent_products(txt)
+    return check_relevent_products(txt, l)
 
-def check_relevent_products(inp_features):
+def rel(df: pd.DataFrame, inp):
+    def cal(bl: set, tl: set):
+        i = bl.intersection(tl)
+        u = bl.union(tl)
+        return len(i) / len(u) if u else 0.0
+    
+    scr = [
+        (df.iloc[i]['product_name'], df.iloc[i]['product_url'], 
+         cal(set(ast.literal_eval(df.iloc[i]['label'])), inp))
+        for i in range(len(df))
+    ]
+
+    return sorted(scr, key=lambda x: x[2], reverse=True)
+
+def check_relevent_products(inp_features, lbl):
     try: 
         #Reading Data From Google Cloud Bucket CSV
-        DB = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
-
+        DB = pd.read_csv("D:\\Work and Assignments\\Python\\Assessment-2 (GOOGLE VISION API)\\results.csv")
         #features Present in database csv file
-        DB_features = DB['objects_extracted']
-        
-        name = []
-        link = []
+        DB_features = DB['object']
         inp_features = set(ast.literal_eval(inp_features))
+        lbl = set(ast.literal_eval(lbl))
         
-        for i in range(len(DB_features)):
-            DB_obj = set(ast.literal_eval(DB_features[i]))
-            if len(inp_features.intersection(DB_obj)) !=0:
-                name.append(DB.iloc[i]['product_name'])
-                link.append(DB.iloc[i]['product_url'])
+        data = [len(inp_features.intersection(set(ast.literal_eval(feature)))) > 0 for feature in DB_features]
+        new_df = DB[data][['product_name', 'product_url', 'label']].reset_index(drop=True)
+        final = rel(new_df, lbl)
+        
+        name, link = zip(*[(n, l) for n, l, _ in final])
         
         if(len(link)==0):
             gr.Warning(f"No product found in dataBase, \nPlease try again later")
