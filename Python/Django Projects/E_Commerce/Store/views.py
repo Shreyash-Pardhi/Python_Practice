@@ -100,6 +100,9 @@ def validateCSVfile(fileCsv):
         raise ValidationError('Please upload only a csv file')
     
     df = pd.read_csv(fileCsv, index_col=False)
+    if len(df)==0:
+        raise ValidationError("Uploded CSV file is Empty")
+    
     if not {'product_name','product_url'}.issubset(df.columns):
         raise ValidationError("'product_name' and 'product_url' are missing, if present please check for correct column names")
     
@@ -160,7 +163,7 @@ def registerUSER(req):
                 user = form.cleaned_data.get('username')
                 a = form.cleaned_data.get('is_admin')
                 print("heheheheheh: ",a)
-                messages.success(req, f'{user} Registered Successfully')
+                messages.success(req, f'User ({user}) Registered Successfully')
                 return redirect('login')
         except Exception as e:
             print(f"This is the Error: {e}")
