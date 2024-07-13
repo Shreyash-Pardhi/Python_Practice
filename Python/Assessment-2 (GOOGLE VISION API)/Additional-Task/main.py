@@ -1,7 +1,6 @@
 import gradio as gr
 from google.cloud import vision
 import os
-import cloudinary
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Python\\Assessment-2 (GOOGLE VISION API)\\Additional-Task\\storage_key.json"
 
 
@@ -37,15 +36,18 @@ def Feature_Extraction(img_path):
         text = [t.description for t in texts]
         txt = f"Text not detected!!" if len(text)==0 else f"{text[0]}"
         
+        objects = client.object_localization(image=img).localized_object_annotations
+        obj = [ob.name for ob in objects]
     except Exception as e:
         gr.Warning(f"Something happened!!!, \nPlease refresh and start again...")
     
-    return (l,lbl,txt)
+    return (l,obj,lbl,txt)
 
 # def save_to_csv()
 
 
 brand = gr.Text(label="Brand / Logo")
+ob = gr.Text(label="Object")
 labels = gr.Text(label="Labels")
 text = gr.Text(label="Text")
 
@@ -54,7 +56,7 @@ with gr.Blocks(title="Image-Feature Extraction",
             ) as demo:
         gr.Interface(fn= Feature_Extraction,
                         inputs=gr.Image(label='Upload Product Image',type='filepath'),
-                        outputs= [brand, labels, text],
+                        outputs= [brand, ob, labels, text],
                         title="<p style='color:orange; font-size:35px'>Image Feature Extraction</p><br>",
                         description="<p style='font-size:15px'>Upload an Image, and see extracted features from image using Google Vision API.<br>Features Like; Logo Detection, Labels Detection, Text Detection.</p>",
                         allow_flagging='never',

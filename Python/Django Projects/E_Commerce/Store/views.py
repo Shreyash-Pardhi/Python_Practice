@@ -61,7 +61,7 @@ def featureExtraction(uri):
     obj = [ob.name for ob in objects]
     # txt = txt + f"{label}" if len(obj)==0 else txt + f"{obj[:3]}"
     txt = list(set(obj).intersection(label)) if set(obj).intersection(label) else label[:2] if len(obj) == 0 else set(obj)
-    return str(txt)
+    return str(txt), str(label)
 
 ###################### Precessing Data ######################
 def preProcessData(df:pd.DataFrame):
@@ -69,8 +69,9 @@ def preProcessData(df:pd.DataFrame):
     with concurrent.futures.ThreadPoolExecutor() as executor:
         results = executor.map(featureExtraction, dfURL)
     fea = [r for r in results]
+    
     for i in range(len(fea)):
-        df.loc[i, "objects_extracted"] = fea[i]
+        df.loc[i, ["object","label"]] = fea[i][0], fea[i][1]
     return df
     
 
