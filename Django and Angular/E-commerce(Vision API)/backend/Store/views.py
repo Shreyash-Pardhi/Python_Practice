@@ -3,9 +3,9 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from .serializers import RegisterSerializer, LoginSerializer
-from django.contrib.auth import login, logout
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view, permission_classes
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.models import User
+
 
 @csrf_exempt
 def registerUSER(req):
@@ -25,10 +25,13 @@ def loginUSER(req):
         if login_ser.is_valid():
             user = login_ser.validated_data['user']
             login(req, user)
-            return JsonResponse(f"logged in", safe=False)
+            return JsonResponse(f"logged in {user}", safe=False)
         return JsonResponse("failed to login", safe=False)
 
 @csrf_exempt
 def logoutUSER(req):
-    logout(req)
-    return JsonResponse(f"Logged Out {req.user.username}", safe=False)
+    if req.user.is_authenticated:
+        username = req.user.username
+        logout(req)
+        return JsonResponse(f"Logged Out {username}", safe=False)
+    return JsonResponse("No user is logged in", safe=False)
