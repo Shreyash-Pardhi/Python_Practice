@@ -9,9 +9,13 @@ import { Observable } from 'rxjs';
 export class SharedAllService {
   readonly API_Endpoint = 'http://127.0.0.1:8000/'
 
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  registerUser(data: any){
-      return this.http.post(this.API_Endpoint + 'store/register/',data);
+  registerUser(data: any) {
+    return this.http.post(this.API_Endpoint + 'store/register/', data);
+  }
+
+  loginUser(data: any) {
+    return this.http.post(this.API_Endpoint + 'store/login/', data);
   }
 }
