@@ -23,7 +23,11 @@ export class LoginComponent {
   UserLogin(): any {
     console.log(this.data);
     this.service.loginUser(this.data).subscribe((res) => {
-      alert(res.toString());
+      if (res.success) {
+        alert(res.message);
+      } else {
+        alert(res.message);
+      }
     });
   }
 }

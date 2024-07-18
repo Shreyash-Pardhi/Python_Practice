@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { SharedAllService } from '../../shared-all.service';
 import { Router, RouterLink } from '@angular/router';
 
-
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -13,7 +12,7 @@ import { Router, RouterLink } from '@angular/router';
   providers: [SharedAllService, Router],
 })
 export class RegisterComponent {
-  constructor(private service: SharedAllService, private router:Router) { }
+  constructor(private service: SharedAllService, private router: Router) {}
 
   title: string = 'Register';
   is_ad: boolean = false;
@@ -25,10 +24,15 @@ export class RegisterComponent {
     is_admin: this.is_ad,
   };
   UserRegister() {
-    this.service.registerUser(this.data).subscribe((res) => {
-      alert(res.toString());
-      // this.router.navigate(['/login']);
-    }
+    this.service.registerUser(this.data).subscribe(
+      (res) => {
+        if (res.success) {
+          alert(res.message);
+          this.router.navigateByUrl('/login');
+        } else {
+          alert(res.message);
+        }
+      }
       // (error) => {
       //   console.error('Registration error:', error);
       // }
