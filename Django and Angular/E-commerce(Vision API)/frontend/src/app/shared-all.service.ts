@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-interface AuthResponse {
+interface Response {
   success: boolean;
+  u_status?: boolean;
   message: string;
 }
 
@@ -23,21 +24,18 @@ export class SharedAllService {
   constructor(private http: HttpClient) {}
 
   registerUser(data: any) {
-    return this.http.post<AuthResponse>(
+    return this.http.post<Response>(
       this.API_Endpoint + 'store/register/',
       data
     );
   }
 
   loginUser(data: any) {
-    return this.http.post<AuthResponse>(
-      this.API_Endpoint + 'store/login/',
-      data
-    );
+    return this.http.post<Response>(this.API_Endpoint + 'store/login/', data);
   }
 
-  logoutUser() {
-    return this.http.get<AuthResponse>(this.API_Endpoint + 'store/logout/');
+  logoutUser(): Observable<Response> {
+    return this.http.post<Response>(this.API_Endpoint + 'store/logout/', {});
   }
 
   userHome(data?: any): Observable<userHomeResponce> {
@@ -49,5 +47,22 @@ export class SharedAllService {
     } else {
       return this.http.get<userHomeResponce>(this.API_Endpoint + 'store/Home/');
     }
+  }
+
+  addSinglePROD(data: any) {
+    return this.http.post<Response>(
+      this.API_Endpoint + 'store/addProduct/',
+      data
+    );
+  }
+
+  addCsvFile(file: File) {
+    const formdata = new FormData();
+    formdata.append('file', file);
+
+    return this.http.post<Response>(
+      this.API_Endpoint + 'store/addProductFile/',
+      formdata
+    );
   }
 }

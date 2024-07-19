@@ -38,12 +38,12 @@ export class UserHomeComponent {
   userLogout() {
     this.service.logoutUser().subscribe(
       (res) => {
-        if (res.success) {
-          alert(res.message);
-          this.router.navigateByUrl('/login');
-        } else {
-          alert(res.message);
-        }
+        // if (res.success) {
+        //   alert(res.message);
+        this.router.navigateByUrl('/login');
+        // } else {
+        //   alert(res.message);
+        // }
       }
       // (error) => {
       //   console.error('Registration error:', error);

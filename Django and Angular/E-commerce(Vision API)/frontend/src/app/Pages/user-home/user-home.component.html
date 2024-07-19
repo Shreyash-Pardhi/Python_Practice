@@ -154,7 +154,7 @@
             <a>Hii, <strong>user</strong></a>
             <div class="right-nav">
                 <!-- {% if request.user.is_admin %} -->
-                <a href="{% url 'adminHome' %}" style="margin-left: 30px;" title="Add products to database">
+                <a [routerLink]="'/adminHome'" style="margin-left: 30px;" title="Add products to database">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                         class="bi bi-database-fill-add" viewBox="0 0 16 16">
                         <path
@@ -180,7 +180,7 @@
                     </div>
                 </form>
 
-                <a href="{% url 'imageSearch' %}" style="margin-left: 30px;" title="Search using Image">
+                <a href="http://127.0.0.1:7860" style="margin-left: 30px;" title="Search using Image">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                         class="bi bi-camera" viewBox="0 0 16 16">
                         <path

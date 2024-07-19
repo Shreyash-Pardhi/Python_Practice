@@ -112,7 +112,6 @@ def validateCSVfile(fileCsv):
     return df
 
 ###################### Adding CSV data ######################
-
 def addCSVfile(req):
     try:
         if req.method == 'POST':

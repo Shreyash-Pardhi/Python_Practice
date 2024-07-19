@@ -7,4 +7,6 @@ urlpatterns = [
     path('logout/', views.logoutUSER, name='logout'),
     
     path('Home/', views.getAllProd, name='Home'),
+    path('addProduct/', views.addSingleProd, name='addSingleProd'),
+    path('addProductFile/', views.addCSVfile, name='addCSVfile'),
 ]
