@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -21,7 +21,7 @@ interface userHomeResponce {
 export class SharedAllService {
   readonly API_Endpoint = 'http://127.0.0.1:8000/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   registerUser(data: any) {
     return this.http.post<Response>(
@@ -31,11 +31,13 @@ export class SharedAllService {
   }
 
   loginUser(data: any) {
-    return this.http.post<Response>(this.API_Endpoint + 'store/login/', data);
+    // const headers = new HttpHeaders({ 'X-CSRFToken': this.getCsrfToken() });
+    return this.http.post<Response>(this.API_Endpoint + 'store/login/', data, { withCredentials: true });
   }
 
   logoutUser(): Observable<Response> {
-    return this.http.post<Response>(this.API_Endpoint + 'store/logout/', {});
+    // const headers = new HttpHeaders({ 'X-CSRFToken': this.getCsrfToken() });
+    return this.http.post<Response>(this.API_Endpoint + 'store/logout/', {}, { withCredentials: true });
   }
 
   userHome(data?: any): Observable<userHomeResponce> {
@@ -65,4 +67,26 @@ export class SharedAllService {
       formdata
     );
   }
+
+
+  // private getCsrfToken(): any {
+  //   const token = this.getCookie('csrftoken') || this.getMetaContent('csrf-token');
+  //   return token;
+  // }
+
+  // private getCookie(name: string): string | null {
+  //   const nameEQ = name + "=";
+  //   const ca = document.cookie.split(';');
+  //   for(let i=0;i < ca.length;i++) {
+  //       let c = ca[i];
+  //       while (c.charAt(0) == ' ') c = c.substring(1,c.length);
+  //       if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+  //   }
+  //   return null;
+  // }
+
+  // private getMetaContent(name: string): string | null {
+  //   const element: HTMLMetaElement | null = document.querySelector(`meta[name="${name}"]`);
+  //   return element ? element.content : null;
+  // }
 }

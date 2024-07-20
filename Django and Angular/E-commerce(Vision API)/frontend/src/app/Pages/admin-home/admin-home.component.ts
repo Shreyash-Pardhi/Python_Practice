@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SharedAllService } from '../../shared-all.service';
 import { FormsModule } from '@angular/forms';
 import { LoaderService } from '../../loader.service';
@@ -10,7 +10,7 @@ import { LoaderService } from '../../loader.service';
   imports: [RouterLink, FormsModule],
   templateUrl: './admin-home.component.html',
   styleUrl: './admin-home.component.css',
-  providers: [SharedAllService],
+  providers: [SharedAllService, Router],
 })
 export class AdminHomeComponent {
   selectedFile: File | null = null;
@@ -22,17 +22,21 @@ export class AdminHomeComponent {
 
   constructor(
     private service: SharedAllService,
-    private loaderService: LoaderService
-  ) {}
+    private router: Router,
+    private loaderService: LoaderService,
+  ) { }
 
   addSingleProduct() {
     if (this.inp_data['prodName'] == '' || this.inp_data['prodLink'] == '') {
       alert('Please Enter both the fields to add product...');
     } else {
+      this.loaderService.showLoader();
       this.service.addSinglePROD(this.inp_data).subscribe((res) => {
         if (res.success) {
+          this.loaderService.hideLoader();
           alert(res.message);
         } else {
+          this.loaderService.hideLoader();
           alert(res.message);
         }
       });
@@ -62,5 +66,21 @@ export class AdminHomeComponent {
     } else {
       alert('Please choose a csv file first!!!');
     }
+  }
+
+  userLogout() {
+    this.service.logoutUser().subscribe(
+      (res) => {
+        // if (res.success) {
+        //   alert(res.message);
+        this.router.navigateByUrl('/login');
+        // } else {
+        //   alert(res.message);
+        // }
+      }
+      // (error) => {
+      //   console.error('Registration error:', error);
+      // }
+    );
   }
 }

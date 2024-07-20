@@ -1,3 +1,4 @@
+<title>Home</title>
 <style>
     h1 {
         margin-top: 60px;
@@ -37,11 +38,7 @@
         margin: 25px;
         align-items: center;
     }
-
-    body {
-        background-color: rgb(22, 22, 22);
-    }
-
+    
     .nav-elements {
         display: flex;
         justify-content: space-between;
@@ -145,81 +142,78 @@
     }
 </style>
 
-<!-- {% include 'loader.html' %} -->
 
-<div id="base-content">
-    <nav class="navbar-main">
-        <div class="nav-elements">
+<nav class="navbar-main">
+    <div class="nav-elements">
 
-            <a>Hii, <strong>user</strong></a>
-            <div class="right-nav">
-                <!-- {% if request.user.is_admin %} -->
-                <a [routerLink]="'/adminHome'" style="margin-left: 30px;" title="Add products to database">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
-                        class="bi bi-database-fill-add" viewBox="0 0 16 16">
-                        <path
-                            d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0M8 1c-1.573 0-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4s.875 1.755 1.904 2.223C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777C13.125 5.755 14 5.007 14 4s-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1" />
-                        <path
-                            d="M2 7v-.839c.457.432 1.004.751 1.49.972C4.722 7.693 6.318 8 8 8s3.278-.307 4.51-.867c.486-.22 1.033-.54 1.49-.972V7c0 .424-.155.802-.411 1.133a4.51 4.51 0 0 0-4.815 1.843A12 12 0 0 1 8 10c-1.573 0-3.022-.289-4.096-.777C2.875 8.755 2 8.007 2 7m6.257 3.998L8 11c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13h.027a4.55 4.55 0 0 1 .23-2.002m-.002 3L8 14c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-1.3-1.905" />
-                    </svg>
-                </a>
-                <!-- {% endif %} -->
+        <a>Hii, <strong>user</strong></a>
+        <div class="right-nav">
+            <!-- {% if request.user.is_admin %} -->
+            <a [routerLink]="'/adminHome'" style="margin-left: 30px;" title="Add products to database">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                    class="bi bi-database-fill-add" viewBox="0 0 16 16">
+                    <path
+                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0M8 1c-1.573 0-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4s.875 1.755 1.904 2.223C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777C13.125 5.755 14 5.007 14 4s-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1" />
+                    <path
+                        d="M2 7v-.839c.457.432 1.004.751 1.49.972C4.722 7.693 6.318 8 8 8s3.278-.307 4.51-.867c.486-.22 1.033-.54 1.49-.972V7c0 .424-.155.802-.411 1.133a4.51 4.51 0 0 0-4.815 1.843A12 12 0 0 1 8 10c-1.573 0-3.022-.289-4.096-.777C2.875 8.755 2 8.007 2 7m6.257 3.998L8 11c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13h.027a4.55 4.55 0 0 1 .23-2.002m-.002 3L8 14c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-1.3-1.905" />
+                </svg>
+            </a>
+            <!-- {% endif %} -->
 
-                <form (submit)="getAllData()">
-                    <!-- {% csrf_token %} -->
-                    <div class="search-bar">
-                        <input type="search" [(ngModel)]="search_query.search_txt" name="search_txt"
-                            placeholder="Search" class="search-input" required>
-                        <button type="submit" class="btn btn-primary" data-mdb-ripple-init title="search">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="8" fill="currentColor"
-                                class="bi bi-search" viewBox="0 0 16 16">
-                                <path
-                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                            </svg>
-                        </button>
-                    </div>
-                </form>
+            <form (submit)="getAllData()">
+                <!-- {% csrf_token %} -->
+                <div class="search-bar">
+                    <input type="search" [(ngModel)]="search_query.search_txt" name="search_txt" placeholder="Search"
+                        class="search-input" required>
+                    <button type="submit" class="btn btn-primary" data-mdb-ripple-init title="search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="8" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
 
-                <a href="http://127.0.0.1:7860" style="margin-left: 30px;" title="Search using Image">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
-                        class="bi bi-camera" viewBox="0 0 16 16">
-                        <path
-                            d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4z" />
-                        <path
-                            d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
-                    </svg>
-                </a>
-                <a (click)="userLogout()" style="margin-left: 30px;" title="Logout">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
-                        class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
-                        <path fill-rule="evenodd"
-                            d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
-                    </svg>
-                </a>
-            </div>
+            <a href="http://127.0.0.1:7860" style="margin-left: 30px;" title="Search using Image">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-camera"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4z" />
+                    <path
+                        d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
+                </svg>
+            </a>
+            <a (click)="userLogout()" style="margin-left: 30px;" title="Logout">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                    class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                    <path fill-rule="evenodd"
+                        d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                </svg>
+            </a>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <!-- {% for msg in messages %}
+<!-- {% for msg in messages %}
         <div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin: 10px">
             <div style="margin-left: 20px;"><strong>Hey!</strong> {{msg}}</div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div> -->
-    <!-- {% endfor %} -->
+<!-- {% endfor %} -->
 
-    <h1 align='center' style="color: orange;"> {{ ti }} </h1>
+<h1 align='center' style="color: orange;"> {{ ti }} </h1>
 
-    <div class="products">
-        <!-- {% for item in data%} -->
+<div class="products">
+    <!-- {% for item in data%} -->
 
-        <div *ngFor="let item of data" id="oneProd">
-            <img src="{{ item.link }}" alt="Failed To load Image" class="img-card">
-            <figcaption>{{ item.name }}</figcaption>
-        </div>
-        <!-- {% endfor %} -->
+    <div *ngFor="let item of data" id="oneProd">
+        <img src="{{ item.link }}" alt="Failed To load Image" class="img-card">
+        <figcaption>{{ item.name }}</figcaption>
     </div>
+    <!-- {% endfor %} -->
 </div>

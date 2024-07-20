@@ -2,7 +2,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from .serializers import RegisterSerializer, LoginSerializer
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from google.cloud import vision
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
@@ -169,27 +169,34 @@ def registerUSER(req):
 
 ###################### Login User ######################
 @csrf_exempt
-# @api_view(['POST'])
-# @permission_classes([AllowAny])
 def loginUSER(req):
+
     if req.method == 'POST':
         login_data = JSONParser().parse(req)
         login_ser = LoginSerializer(data=login_data)
         if login_ser.is_valid():
             user = login_ser.validated_data['user']
             login(req, user)
-            print("log:",user.is_admin)
             return JsonResponse({"success":True, "u_status":user.is_admin, "message":f"{user}, Logged in successfully..."}, safe=False)
-        return JsonResponse({"success":False, "message":f"Failed to Log In!!!"}, safe=False)
+        return JsonResponse({"success":False, "message":f"Invalid Credentials!!!"}, safe=False)
+
 
 
 ###################### Logout user ######################
 @csrf_exempt
 def logoutUSER(req):
+    # print(f"auth: {req.user.is_authenticated}")
+    # print(f"user: {req.user}")
+    # print(f"name: {req.user.username}")
+    # if req.user.is_authenticated:
+    #     username = req.user.username
+        print(f"User {req.user.username} is logging out.")
+        logout(req)
+        return JsonResponse({"success":True, "message":f"{req.user.username}, Logged out successfully..."}, safe=False)
+    # return JsonResponse({"success":False, "message":"No user is logged in!!!"}, safe=False)
+
+@csrf_exempt
+def currentUser(req):
     if req.user.is_authenticated:
         username = req.user.username
         print(f"User {username} is logging out.")
-        logout(req)
-        return JsonResponse({"success":True, "message":f"{username}, Logged out successfully..."}, safe=False)
-    print(f"User {req.user.username} is not..")
-    return JsonResponse({"success":False, "message":"No user is logged in!!!"}, safe=False)
