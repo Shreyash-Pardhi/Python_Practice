@@ -16,6 +16,7 @@ export class AdminHomeComponent {
   selectedFile: File | null = null;
 
   USERNM?: any;
+  csrfToken:any;
 
   inp_data: any = {
     prodName: '',
@@ -32,6 +33,9 @@ export class AdminHomeComponent {
     this.service.currentUser().subscribe((res)=>{
       this.USERNM=res.userData['username']
     });
+      // this.csrfToken = this.service.getCookie('csrftoken');
+      // console.log('CSRF Token:', this.csrfToken);
+    
   }
   addSingleProduct() {
     if (this.inp_data['prodName'] == '' || this.inp_data['prodLink'] == '') {

@@ -6,7 +6,7 @@ interface Response {
   success: boolean;
   u_status?: boolean;
   message: string;
-  userData?:any;
+  userData?: any;
 }
 
 interface userHomeResponce {
@@ -14,7 +14,7 @@ interface userHomeResponce {
   s_title: string;
   message: string;
   data: any;
-  
+
 }
 
 
@@ -23,8 +23,21 @@ interface userHomeResponce {
 })
 export class SharedAllService {
   readonly API_Endpoint = 'http://127.0.0.1:8000/';
+  private tokenKey = '';
+  private csrfToken?: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {  }
+
+  // getCsrfToken(): string {
+  //   const name = 'csrftoken';
+  //   const value = `; ${document.cookie}`;
+  //   const parts = value.split(`; ${name}=`);
+  //   if (parts.length === 2) {
+  //     return parts.pop().split(';').shift();
+  //   }
+  //   return '';
+  // }
+
 
   registerUser(data: any) {
     return this.http.post<Response>(
@@ -34,13 +47,22 @@ export class SharedAllService {
   }
 
   loginUser(data: any) {
-    // const headers = new HttpHeaders({ 'X-CSRFToken': this.getCsrfToken() });
-    return this.http.post<Response>(this.API_Endpoint + 'store/login/', data, { withCredentials: true });
+    return this.http.post<Response>(this.API_Endpoint + 'store/login/', data, { withCredentials: true }).pipe(
+      tap((res: any) => {
+        if (res.success) {
+          localStorage.setItem('token', res.res['token']);
+        }
+      })
+    );
   }
 
   logoutUser(): Observable<Response> {
-    // const headers = new HttpHeaders({ 'X-CSRFToken': this.getCsrfToken() });
-    return this.http.post<Response>(this.API_Endpoint + 'store/logout/', {}, { withCredentials: true });
+    const headers = this.getAuthHeaders();
+    return this.http.post<Response>(this.API_Endpoint + 'store/logout/', {}, { headers: headers, withCredentials: true }).pipe(
+      tap(() => {
+        localStorage.removeItem('token');
+      })
+    );
   }
 
   userHome(data?: any): Observable<userHomeResponce> {
@@ -71,29 +93,17 @@ export class SharedAllService {
     );
   }
 
-  currentUser(){
-    return this.http.get<Response>(this.API_Endpoint + 'store/currentUser/');
+  currentUser() {
+    const headers = this.getAuthHeaders();
+    return this.http.get<Response>(this.API_Endpoint + 'store/currentUser/', { headers: headers });
   }
 
-
-  // private getCsrfToken(): any {
-  //   const token = this.getCookie('csrftoken') || this.getMetaContent('csrf-token');
-  //   return token;
-  // }
-
-  // private getCookie(name: string): string | null {
-  //   const nameEQ = name + "=";
-  //   const ca = document.cookie.split(';');
-  //   for(let i=0;i < ca.length;i++) {
-  //       let c = ca[i];
-  //       while (c.charAt(0) == ' ') c = c.substring(1,c.length);
-  //       if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-  //   }
-  //   return null;
-  // }
-
-  // private getMetaContent(name: string): string | null {
-  //   const element: HTMLMetaElement | null = document.querySelector(`meta[name="${name}"]`);
-  //   return element ? element.content : null;
-  // }
+  getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders()
+      .set('Authorization', `Token ${token}`);
+    // .set('X-CSRFToken', this.csrfToken);
+    console.log(headers)
+    return headers;
+  }
 }

@@ -14,15 +14,14 @@ import { SharedAllService } from '../../shared-all.service';
 export class LoginComponent {
   constructor(private service: SharedAllService, private router: Router) {}
 
-  user?:string;
-  title: string = 'Login';
+  user?:String;
+  title: String = 'Login';
   data: any = {
     username: '',
     password: '',
   };
 
   UserLogin(): any {
-    console.log(this.data);
     this.service.loginUser(this.data).subscribe((res) => {
       if (res.success) {
         // this.user = res.username;

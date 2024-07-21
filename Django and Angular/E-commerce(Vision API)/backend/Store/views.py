@@ -1,11 +1,16 @@
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+from rest_framework.response import Response
 from .serializers import RegisterSerializer, LoginSerializer
+from .models import User
 from django.contrib.auth import login, logout, authenticate
 from google.cloud import vision
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
+from rest_framework.decorators import authentication_classes, permission_classes,api_view
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
 import os
 import requests
 import pandas as pd
@@ -135,7 +140,11 @@ def addCSVfile(req):
 
 ###################### getAllProducts / UserHome ######################
 @csrf_exempt
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def getAllProd(req):
+    
+
     search_title = 'All Products'
     df = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
     df = df[::-1]
@@ -165,43 +174,72 @@ def registerUSER(req):
         user_ser = RegisterSerializer(data=user_data)
         if user_ser.is_valid():
             user_ser.save()
-            # login(req, user)
-            # token, created = Token.objects.get_or_create(user=user)
-            return JsonResponse({"success":True, "message":f"{user_data['username']}, you have successfully registered..."}, safe=False)
-        return JsonResponse({"success":False, "message":f"Registration Failed!!, please try again..."}, safe=False)
+            user = User.objects.get(username = user_data['username'])
+            token = Token.objects.get(user=user)
+            ser = RegisterSerializer(user)
+            i={
+                "user":ser.data,
+                "token":token.key
+            }
+
+            return JsonResponse({"success":True, "message":f"{user}, you have successfully Registered..."}, safe=False)
+        
+        error=None
+        for key, value in user_ser.errors.items():
+            if isinstance(value, list) and len(value) > 0:
+                error = value[0]
+                break
+
+        return JsonResponse({"success":False, "message":f"{error}"}, safe=False)
 
 
 ###################### Login User ######################
 @csrf_exempt
+@ensure_csrf_cookie
 def loginUSER(req):
     global usernm
     if req.method == 'POST':
         login_data = JSONParser().parse(req)
         login_ser = LoginSerializer(data=login_data)
         if login_ser.is_valid():
-            user = login_ser.validated_data['user']
+            user = User.objects.get(username = login_data['username'])
+            ser = RegisterSerializer(user)
+            token, create_token = Token.objects.get_or_create(user = user)
             login(req, user)
+
+            res={
+                "user":ser.data
+            }
+
+            res['token'] = token.key if token else create_token.key
+
             usernm = {'username':user.username, 'is_admin':user.is_admin}
-            
-            return JsonResponse({"success":True, "username":user.username,"u_status":user.is_admin, "message":f"{user}, Logged in successfully..."}, safe=False)
-        return JsonResponse({"success":False, "message":f"Invalid Credentials!!!"}, safe=False)
+            return JsonResponse({"success":True,"res":res, "u_status":user.is_admin, "message":f"{user}, Logged in successfully..."}, safe=False)
+        
+        error=None
+        for key, value in login_ser.errors.items():
+            if isinstance(value, list) and len(value) > 0:
+                error = value[0]
+                break
+        return JsonResponse({"success":False, "message":f"{error}"}, safe=False)
 
 
 
 ###################### Logout user ######################
 @csrf_exempt
+@ensure_csrf_cookie
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def logoutUSER(req):
-    # print(f"auth: {req.user.is_authenticated}")
-    # print(f"user: {req.user}")
-    # print(f"name: {req.user.username}")
-    # if req.user.is_authenticated:
-    #     username = req.user.username
-        print(f"User {req.user.id} is logging out.")
-        logout(req)
-        return JsonResponse({"success":True, "message":f"{req.user.username}, Logged out successfully..."}, safe=False)
+    # req.user.auth_token.delete()
+    print(req.user)
+    logout(req)
+    return JsonResponse({"success":True, "message":f"{req.user}, Logged out successfully..."}, safe=False)
     # return JsonResponse({"success":False, "message":"No user is logged in!!!"}, safe=False)
 
 @csrf_exempt
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def currentUser(req):
     global usernm
-    return JsonResponse({"userData": usernm})
+    return Response({"userData": usernm})
