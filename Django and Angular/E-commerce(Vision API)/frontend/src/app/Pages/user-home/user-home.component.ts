@@ -15,7 +15,8 @@ import { LoaderService } from '../../loader.service';
 })
 export class UserHomeComponent {
   constructor(private service: SharedAllService, private router: Router, private loaderService: LoaderService,) { }
-
+  Uname?:any;
+  isAdmin:boolean=false;
   data: any;
   ti: any;
   search_query: any = {
@@ -23,6 +24,10 @@ export class UserHomeComponent {
   };
 
   ngOnInit(): void {
+    this.service.currentUser().subscribe((res)=>{
+      this.Uname=res.userData['username'];
+      this.isAdmin = res.userData['is_admin'];
+    });
     this.getAllData();
   }
 

@@ -146,10 +146,10 @@
 <nav class="navbar-main">
     <div class="nav-elements">
 
-        <a>Hii, <strong>user</strong></a>
+        <a>Hii, <strong>{{ Uname }}</strong></a>
         <div class="right-nav">
             <!-- {% if request.user.is_admin %} -->
-            <a [routerLink]="'/adminHome'" style="margin-left: 30px;" title="Add products to database">
+            <a *ngIf="isAdmin" [routerLink]="'/adminHome'" style="margin-left: 30px;" title="Add products to database">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                     class="bi bi-database-fill-add" viewBox="0 0 16 16">
                     <path

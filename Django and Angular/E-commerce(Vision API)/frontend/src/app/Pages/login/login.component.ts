@@ -14,6 +14,7 @@ import { SharedAllService } from '../../shared-all.service';
 export class LoginComponent {
   constructor(private service: SharedAllService, private router: Router) {}
 
+  user?:string;
   title: string = 'Login';
   data: any = {
     username: '',
@@ -24,6 +25,8 @@ export class LoginComponent {
     console.log(this.data);
     this.service.loginUser(this.data).subscribe((res) => {
       if (res.success) {
+        // this.user = res.username;
+        // console.log(this.user);
         if (res.u_status) {
           this.router.navigateByUrl('/adminHome');
         } else {

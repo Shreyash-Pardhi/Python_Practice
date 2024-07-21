@@ -103,7 +103,7 @@
 
 <nav class="navbar-main">
     <div class="nav-elements">
-        <a>Hii, <strong>user</strong></a>
+        <a>Hii, <strong>{{ USERNM }}</strong></a>
         <div>
             <a [routerLink]="'/userHome'">All Products</a>
             <a (click)="userLogout()" style="margin-left: 30px;" title="Logout">

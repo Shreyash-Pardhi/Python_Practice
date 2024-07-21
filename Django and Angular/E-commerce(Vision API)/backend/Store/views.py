@@ -15,6 +15,10 @@ from rest_framework.authtoken.models import Token
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Django and Angular\\E-commerce(Vision API)\\backend\\storage_key.json"
 
+usernm = {
+    "username":"", "is_admin": False
+}
+
 ###################### Check Duplicate Values ######################
 def checkDuplicateData(df:pd.DataFrame):
     index = []
@@ -145,7 +149,7 @@ def getAllProd(req):
             url = df[df['product_name'].str.lower().str.contains(query)]['product_url'].tolist()
             search_title = query.capitalize()
             data=[{"link":l, "name":n} for l,n in zip(url, name)]
-            res={"success":True, "s_title": search_title,"message":"","data":data}
+            res={"success":True, "s_title": search_title,"message":f"","data":data}
         else:
             res={"success":False, "s_title": search_title,"message":"Sorry, We didn't found the product you are looking for...","data":data}
     return JsonResponse(res, safe=False)
@@ -170,14 +174,16 @@ def registerUSER(req):
 ###################### Login User ######################
 @csrf_exempt
 def loginUSER(req):
-
+    global usernm
     if req.method == 'POST':
         login_data = JSONParser().parse(req)
         login_ser = LoginSerializer(data=login_data)
         if login_ser.is_valid():
             user = login_ser.validated_data['user']
             login(req, user)
-            return JsonResponse({"success":True, "u_status":user.is_admin, "message":f"{user}, Logged in successfully..."}, safe=False)
+            usernm = {'username':user.username, 'is_admin':user.is_admin}
+            
+            return JsonResponse({"success":True, "username":user.username,"u_status":user.is_admin, "message":f"{user}, Logged in successfully..."}, safe=False)
         return JsonResponse({"success":False, "message":f"Invalid Credentials!!!"}, safe=False)
 
 
@@ -190,13 +196,12 @@ def logoutUSER(req):
     # print(f"name: {req.user.username}")
     # if req.user.is_authenticated:
     #     username = req.user.username
-        print(f"User {req.user.username} is logging out.")
+        print(f"User {req.user.id} is logging out.")
         logout(req)
         return JsonResponse({"success":True, "message":f"{req.user.username}, Logged out successfully..."}, safe=False)
     # return JsonResponse({"success":False, "message":"No user is logged in!!!"}, safe=False)
 
 @csrf_exempt
 def currentUser(req):
-    if req.user.is_authenticated:
-        username = req.user.username
-        print(f"User {username} is logging out.")
+    global usernm
+    return JsonResponse({"userData": usernm})

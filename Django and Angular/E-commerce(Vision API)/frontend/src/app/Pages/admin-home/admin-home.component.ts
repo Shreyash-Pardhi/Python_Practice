@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SharedAllService } from '../../shared-all.service';
 import { FormsModule } from '@angular/forms';
 import { LoaderService } from '../../loader.service';
@@ -15,6 +15,8 @@ import { LoaderService } from '../../loader.service';
 export class AdminHomeComponent {
   selectedFile: File | null = null;
 
+  USERNM?: any;
+
   inp_data: any = {
     prodName: '',
     prodLink: '',
@@ -26,6 +28,11 @@ export class AdminHomeComponent {
     private loaderService: LoaderService,
   ) { }
 
+  ngOnInit(): void {
+    this.service.currentUser().subscribe((res)=>{
+      this.USERNM=res.userData['username']
+    });
+  }
   addSingleProduct() {
     if (this.inp_data['prodName'] == '' || this.inp_data['prodLink'] == '') {
       alert('Please Enter both the fields to add product...');

@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 interface Response {
   success: boolean;
   u_status?: boolean;
   message: string;
+  userData?:any;
 }
 
 interface userHomeResponce {
@@ -13,7 +14,9 @@ interface userHomeResponce {
   s_title: string;
   message: string;
   data: any;
+  
 }
+
 
 @Injectable({
   providedIn: 'root',
@@ -66,6 +69,10 @@ export class SharedAllService {
       this.API_Endpoint + 'store/addProductFile/',
       formdata
     );
+  }
+
+  currentUser(){
+    return this.http.get<Response>(this.API_Endpoint + 'store/currentUser/');
   }
 
 
