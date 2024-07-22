@@ -14,30 +14,15 @@ interface userHomeResponce {
   s_title: string;
   message: string;
   data: any;
-
 }
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedAllService {
   readonly API_Endpoint = 'http://127.0.0.1:8000/';
-  private tokenKey = '';
-  private csrfToken?: any;
 
-  constructor(private http: HttpClient) {  }
-
-  // getCsrfToken(): string {
-  //   const name = 'csrftoken';
-  //   const value = `; ${document.cookie}`;
-  //   const parts = value.split(`; ${name}=`);
-  //   if (parts.length === 2) {
-  //     return parts.pop().split(';').shift();
-  //   }
-  //   return '';
-  // }
-
+  constructor(private http: HttpClient) {}
 
   registerUser(data: any) {
     return this.http.post<Response>(
@@ -47,29 +32,43 @@ export class SharedAllService {
   }
 
   loginUser(data: any) {
-    return this.http.post<Response>(this.API_Endpoint + 'store/login/', data, { withCredentials: true }).pipe(
-      tap((res: any) => {
-        if (res.success) {
-          localStorage.setItem('token', res.res['token']);
-        }
+    return this.http
+      .post<Response>(this.API_Endpoint + 'store/login/', data, {
+        withCredentials: true,
       })
-    );
+      .pipe(
+        tap((res: any) => {
+          if (res.success) {
+            localStorage.setItem('token', res.res['token']);
+          }
+        })
+      );
   }
 
   logoutUser(): Observable<Response> {
     const headers = this.getAuthHeaders();
-    return this.http.post<Response>(this.API_Endpoint + 'store/logout/', {}, { headers: headers, withCredentials: true }).pipe(
-      tap(() => {
-        localStorage.removeItem('token');
+    return this.http
+      .get<Response>(this.API_Endpoint + 'store/logout/', {
+        headers: headers,
+        withCredentials: true,
       })
-    );
+      .pipe(
+        tap(() => {
+          localStorage.removeItem('token');
+        })
+      );
   }
 
   userHome(data?: any): Observable<userHomeResponce> {
+    const headers = this.getAuthHeaders();
     if (data && Object.keys(data).length > 0) {
       return this.http.post<userHomeResponce>(
         this.API_Endpoint + 'store/Home/',
-        data
+        data,
+        {
+          headers: headers,
+          withCredentials: true,
+        }
       );
     } else {
       return this.http.get<userHomeResponce>(this.API_Endpoint + 'store/Home/');
@@ -77,33 +76,42 @@ export class SharedAllService {
   }
 
   addSinglePROD(data: any) {
+    const headers = this.getAuthHeaders();
     return this.http.post<Response>(
       this.API_Endpoint + 'store/addProduct/',
-      data
+      data,
+      {
+        headers: headers,
+        withCredentials: true,
+      }
     );
   }
 
   addCsvFile(file: File) {
+    const headers = this.getAuthHeaders();
     const formdata = new FormData();
     formdata.append('file', file);
 
     return this.http.post<Response>(
       this.API_Endpoint + 'store/addProductFile/',
-      formdata
+      formdata,
+      {
+        headers: headers,
+        withCredentials: true,
+      }
     );
   }
 
   currentUser() {
     const headers = this.getAuthHeaders();
-    return this.http.get<Response>(this.API_Endpoint + 'store/currentUser/', { headers: headers });
+    return this.http.get<Response>(this.API_Endpoint + 'store/currentUser/', {
+      headers: headers,
+    });
   }
 
   getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
-    let headers = new HttpHeaders()
-      .set('Authorization', `Token ${token}`);
-    // .set('X-CSRFToken', this.csrfToken);
-    console.log(headers)
+    let headers = new HttpHeaders().set('Authorization', `Token ${token}`);
     return headers;
   }
 }

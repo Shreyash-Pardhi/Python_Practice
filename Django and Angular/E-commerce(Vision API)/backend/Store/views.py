@@ -20,10 +20,6 @@ from rest_framework.authtoken.models import Token
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Django and Angular\\E-commerce(Vision API)\\backend\\storage_key.json"
 
-usernm = {
-    "username":"", "is_admin": False
-}
-
 ###################### Check Duplicate Values ######################
 def checkDuplicateData(df:pd.DataFrame):
     index = []
@@ -84,6 +80,9 @@ def preProcessData(df:pd.DataFrame):
 
 ###################### Adding Single Product ######################
 @csrf_exempt
+@api_view(["POST"])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def addSingleProd(req):
     try:
         if req.method == 'POST':
@@ -120,6 +119,9 @@ def validateCSVfile(fileCsv):
 
 ###################### Adding CSV data ######################
 @csrf_exempt
+@api_view(["POST"])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def addCSVfile(req):
     try:
         if req.method == 'POST':
@@ -140,11 +142,10 @@ def addCSVfile(req):
 
 ###################### getAllProducts / UserHome ######################
 @csrf_exempt
+@api_view(["POST"])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def getAllProd(req):
-    
-
     search_title = 'All Products'
     df = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
     df = df[::-1]
@@ -166,8 +167,6 @@ def getAllProd(req):
 
 ###################### Register User ######################
 @csrf_exempt
-# @api_view(['POST'])
-# @permission_classes([AllowAny])
 def registerUSER(req):
     if req.method == 'POST':
         user_data = JSONParser().parse(req)
@@ -185,7 +184,7 @@ def registerUSER(req):
             return JsonResponse({"success":True, "message":f"{user}, you have successfully Registered..."}, safe=False)
         
         error=None
-        for key, value in user_ser.errors.items():
+        for _, value in user_ser.errors.items():
             if isinstance(value, list) and len(value) > 0:
                 error = value[0]
                 break
@@ -195,7 +194,6 @@ def registerUSER(req):
 
 ###################### Login User ######################
 @csrf_exempt
-@ensure_csrf_cookie
 def loginUSER(req):
     global usernm
     if req.method == 'POST':
@@ -210,14 +208,12 @@ def loginUSER(req):
             res={
                 "user":ser.data
             }
-
             res['token'] = token.key if token else create_token.key
-
-            usernm = {'username':user.username, 'is_admin':user.is_admin}
+            
             return JsonResponse({"success":True,"res":res, "u_status":user.is_admin, "message":f"{user}, Logged in successfully..."}, safe=False)
         
         error=None
-        for key, value in login_ser.errors.items():
+        for _, value in login_ser.errors.items():
             if isinstance(value, list) and len(value) > 0:
                 error = value[0]
                 break
@@ -227,19 +223,20 @@ def loginUSER(req):
 
 ###################### Logout user ######################
 @csrf_exempt
-@ensure_csrf_cookie
+@api_view(["GET"])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def logoutUSER(req):
-    # req.user.auth_token.delete()
-    print(req.user)
-    logout(req)
-    return JsonResponse({"success":True, "message":f"{req.user}, Logged out successfully..."}, safe=False)
-    # return JsonResponse({"success":False, "message":"No user is logged in!!!"}, safe=False)
+    try:
+        req.user.auth_token.delete()
+        return JsonResponse({"success":True, "message":f"{req.user}, Logged out successfully..."}, safe=False)
+    except Exception as e:
+        return JsonResponse({"success":False, "message":f"Unable to logout!!!\n{e}"}, safe=False)
 
 @csrf_exempt
 @api_view(["GET"])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def currentUser(req):
-    global usernm
-    return Response({"userData": usernm})
+    userData = {'username':str(req.user), 'is_admin':req.user.is_admin}
+    return JsonResponse({"userData": userData},safe=False)

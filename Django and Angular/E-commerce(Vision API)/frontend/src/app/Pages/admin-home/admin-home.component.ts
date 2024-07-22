@@ -3,11 +3,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SharedAllService } from '../../shared-all.service';
 import { FormsModule } from '@angular/forms';
 import { LoaderService } from '../../loader.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-home',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, CommonModule],
   templateUrl: './admin-home.component.html',
   styleUrl: './admin-home.component.css',
   providers: [SharedAllService, Router],
@@ -16,26 +17,35 @@ export class AdminHomeComponent {
   selectedFile: File | null = null;
 
   USERNM?: any;
-  csrfToken:any;
+  isAdmin: Boolean = false;
 
   inp_data: any = {
     prodName: '',
     prodLink: '',
   };
+  hidden: any;
 
   constructor(
     private service: SharedAllService,
     private router: Router,
-    private loaderService: LoaderService,
-  ) { }
+    private loaderService: LoaderService
+  ) {}
 
   ngOnInit(): void {
-    this.service.currentUser().subscribe((res)=>{
-      this.USERNM=res.userData['username']
+    this.service.currentUser().subscribe((res) => {
+      this.isAdmin = res.userData['is_admin'];
+      this.USERNM = res.userData['username'];
+      // if (!res.userData['is_admin']){
+      //   alert('You do not have the required permissions to access this page!!!');
+      // }
     });
-      // this.csrfToken = this.service.getCookie('csrftoken');
-      // console.log('CSRF Token:', this.csrfToken);
-    
+
+    // if (!this.isAdmin) {
+    //   console.log(`consition: ${this.isAdmin}`);
+    //   this.loaderService.showLoader();
+    //   this.USERNM = '';
+    //   alert('You do not have the required permissions to access this page!!!');
+    // }
   }
   addSingleProduct() {
     if (this.inp_data['prodName'] == '' || this.inp_data['prodLink'] == '') {
@@ -80,18 +90,10 @@ export class AdminHomeComponent {
   }
 
   userLogout() {
-    this.service.logoutUser().subscribe(
-      (res) => {
-        // if (res.success) {
-        //   alert(res.message);
-        this.router.navigateByUrl('/login');
-        // } else {
-        //   alert(res.message);
-        // }
-      }
-      // (error) => {
-      //   console.error('Registration error:', error);
-      // }
-    );
+    this.loaderService.showLoader();
+    this.service.logoutUser().subscribe((res) => {
+      this.loaderService.hideLoader();
+      this.router.navigateByUrl('/login');
+    });
   }
 }

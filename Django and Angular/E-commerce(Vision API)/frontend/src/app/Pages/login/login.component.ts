@@ -24,15 +24,11 @@ export class LoginComponent {
   UserLogin(): any {
     this.service.loginUser(this.data).subscribe((res) => {
       if (res.success) {
-        // this.user = res.username;
-        // console.log(this.user);
         if (res.u_status) {
           this.router.navigateByUrl('/adminHome');
         } else {
           this.router.navigateByUrl('/userHome');
         }
-        // this.router.navigateByUrl('/userHome');
-        // alert(res.message);
       } else {
         alert(res.message);
       }
