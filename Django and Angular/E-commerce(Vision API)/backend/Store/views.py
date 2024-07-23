@@ -4,10 +4,9 @@ from django.http.response import JsonResponse
 from rest_framework.response import Response
 from .serializers import RegisterSerializer, LoginSerializer
 from .models import User
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout
 from google.cloud import vision
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.cache import cache_control
 from rest_framework.decorators import authentication_classes, permission_classes,api_view
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -145,6 +144,7 @@ def addCSVfile(req):
 @api_view(["POST"])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
+@login_required(login_url="http://localhost:4200/login")
 def getAllProd(req):
     search_title = 'All Products'
     df = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")

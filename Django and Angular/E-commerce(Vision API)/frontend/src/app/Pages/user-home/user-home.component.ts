@@ -45,18 +45,12 @@ export class UserHomeComponent {
     });
   }
   userLogout() {
+    this.loaderService.showLoader()
     this.service.logoutUser().subscribe(
       (res) => {
-        // if (res.success) {
-        //   alert(res.message);
+        this.loaderService.hideLoader()
         this.router.navigateByUrl('/login');
-        // } else {
-        //   alert(res.message);
-        // }
       }
-      // (error) => {
-      //   console.error('Registration error:', error);
-      // }
     );
   }
 }
