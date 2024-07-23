@@ -120,6 +120,11 @@ with gr.Blocks(title="Relevent Product Search",
             .lg.svelte-cmf5ev {
                 width: 250px;
             }
+            .image-frame.svelte-rrgd5g img{
+                width:400px;
+                height:400px;
+                object-fit: contain;
+            }
         </style>
         """)
 
