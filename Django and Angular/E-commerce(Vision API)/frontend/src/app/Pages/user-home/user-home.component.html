@@ -54,23 +54,13 @@
     </div>
 </nav>
 
-<!-- {% for msg in messages %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin: 10px">
-            <div style="margin-left: 20px;"><strong>Hey!</strong> {{msg}}</div>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div> -->
-<!-- {% endfor %} -->
-
 <h1 align='center' style="color: orange;"> {{ ti }} </h1>
 
 <div class="products">
-    <!-- {% for item in data%} -->
 
     <div *ngFor="let item of data" id="oneProd">
         <img src="{{ item.link }}" alt="Failed To load Image" class="img-card">
         <figcaption>{{ item.name }}</figcaption>
     </div>
-    <!-- {% endfor %} -->
+
 </div>

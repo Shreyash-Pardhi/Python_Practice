@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SharedAllService } from '../../shared-all.service';
 import { FormsModule } from '@angular/forms';
 import { LoaderService } from '../../loader.service';
 import { CommonModule } from '@angular/common';
+import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 
 @Component({
   selector: 'app-admin-home',
   standalone: true,
-  imports: [RouterLink, FormsModule, CommonModule],
+  imports: [RouterLink, FormsModule, CommonModule, PageNotFoundComponent],
   templateUrl: './admin-home.component.html',
   styleUrl: './admin-home.component.css',
   providers: [SharedAllService, Router],
@@ -35,17 +36,7 @@ export class AdminHomeComponent {
     this.service.currentUser().subscribe((res) => {
       this.isAdmin = res.userData['is_admin'];
       this.USERNM = res.userData['username'];
-      // if (!res.userData['is_admin']){
-      //   alert('You do not have the required permissions to access this page!!!');
-      // }
     });
-
-    // if (!this.isAdmin) {
-    //   console.log(`consition: ${this.isAdmin}`);
-    //   this.loaderService.showLoader();
-    //   this.USERNM = '';
-    //   alert('You do not have the required permissions to access this page!!!');
-    // }
   }
   addSingleProduct() {
     if (this.inp_data['prodName'] == '' || this.inp_data['prodLink'] == '') {

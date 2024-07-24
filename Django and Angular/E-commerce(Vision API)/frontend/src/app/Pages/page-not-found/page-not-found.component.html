@@ -1,30 +1,12 @@
-<style>
-    .user_card {
-        width: 350px;
-        margin-top: auto;
-        margin-bottom: auto;
-        background: black;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        padding: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        border-radius: 5px;
-
-    }
-</style>
 <div class="d-flex justify-content-center h-100">
-    <div class="user_card">
-        <h1> 404 </h1>
+    <div class="error-container">
+        <h1 style="align-self: center;"> 404 </h1>
         <p>
-            Oops! The page you're
-            looking for is not here.
+            Oops! The page you're looking for is not here.<br>
+            Please Login to continue...
         </p>
-        <a href="https://www.geeksforgeeks.org/">
-            Go Back to Home
+        <a [routerLink]="'/login'">
+            Login
         </a>
     </div>
 </div>

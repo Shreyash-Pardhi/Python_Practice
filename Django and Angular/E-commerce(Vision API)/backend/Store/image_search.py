@@ -6,7 +6,7 @@ import ast
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Python\\Django Projects\\E_Commerce\\storage_key.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Django and Angular\\E-commerce(Vision API)\\backend\\storage_key.json"
 
 
 #Extracting features from input image
@@ -66,14 +66,13 @@ def check_relevent_products(inp_features, lbl):
         
         inp_features = set(ast.literal_eval(inp_features))
         lbl = set(ast.literal_eval(lbl))
-        print(inp_features)
         
         data = [len(inp_features.intersection(set(ast.literal_eval(feature)))) > 0 for feature in DB_features]
-        print(data)
+        
         new_df = DB[data][['product_name', 'product_url', 'label']] #.reset_index(drop=True)
-        print(new_df)
+        
         final = rel(new_df, lbl)
-        # print(final)
+        
         name, link = zip(*[(n, l) for n, l, _ in final])
         
         if(len(link)==0):

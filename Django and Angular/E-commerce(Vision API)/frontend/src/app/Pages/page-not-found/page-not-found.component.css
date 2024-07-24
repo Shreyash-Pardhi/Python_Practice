@@ -1,10 +1,19 @@
-.error-container { 
-	text-align: center; 
-	background-color: #fff; 
-	padding: 20px; 
-	border-radius: 5px; 
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-} 
+
+.error-container {
+	width: 540px;
+	margin-top: auto;
+	margin-bottom: auto;
+	background: black;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 5px;
+}
 
 h1 { 
 	font-size: 5rem; 
@@ -13,12 +22,14 @@ h1 {
 
 p { 
 	font-size: 1.5rem; 
-	color: #333; 
-	margin-bottom: 20px; 
+	color: #818181; 
+	margin-bottom: 23px; 
+	text-align: center;
 } 
 
 a { 
 	text-decoration: none; 
+	text-align: center;
 	background-color: #ff5733; 
 	color: #fff; 
 	padding: 10px 20px; 
