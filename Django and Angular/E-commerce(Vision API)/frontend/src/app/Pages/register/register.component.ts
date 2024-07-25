@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   FormsModule,
@@ -43,27 +44,30 @@ export class RegisterComponent {
       Validators.minLength(5),
     ]),
     is_admin: new FormControl(false),
+  }, {
+    validators: (control: AbstractControl) => {
+      const password1 = control.get('password1');
+      const password2 = control.get('password2');
+  
+      if (!password1 || !password2) {
+        return null;
+      }
+  
+      return password1.value === password2.value ? null : { 'mismatch': true };
+    }
   });
 
-  // data: any = {
-  //   username: '',
-  //   email: '',
-  //   password1: '',
-  //   password2: '',
-  //   is_admin: false,
-  // };
   UserRegister() {
-    // this.loaderService.showLoader();
-    // this.service.registerUser(this.data).subscribe((res) => {
-    //   if (res.success) {
-    //     this.loaderService.hideLoader();
-    //     alert(res.message);
-    //     this.router.navigateByUrl('/login');
-    //   } else {
-    //     this.loaderService.hideLoader();
-    //     alert(res.message);
-    //   }
-    // });
-    console.log(this.Registration_data.value);
+    this.loaderService.showLoader();
+    this.service.registerUser(this.Registration_data.value).subscribe((res) => {
+      if (res.success) {
+        this.loaderService.hideLoader();
+        alert(res.message);
+        this.router.navigateByUrl('/login');
+      } else {
+        this.loaderService.hideLoader();
+        alert(res.message);
+      }
+    });
   }
 }

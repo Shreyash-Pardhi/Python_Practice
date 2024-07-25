@@ -86,7 +86,7 @@
 
 				<form (submit)="UserRegister()" [formGroup]="Registration_data">
 
-					<div class="input-group mb-3">
+					<div class="input-group mb-2">
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
@@ -98,7 +98,7 @@
 					}
 
 
-					<div class="input-group mb-2">
+					<div class="input-group mb-2 mt-3">
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 						</div>
@@ -141,6 +141,15 @@
 						<input class="form-control" type="password" formControlName="password2"
 							placeholder="Re-enter Password...">
 					</div>
+					@if(Registration_data.controls['password2'].touched &&
+					Registration_data.controls['password2'].errors?.['required']){
+					<p class="formErr text-danger">Please re-enter the Password</p>
+					}
+					@if(Registration_data.errors?.['mismatch'] && Registration_data.controls['password2'].touched){
+						<p class="formErr text-danger">Passwords do not match</p>
+					}
+
+
 					<div>
 						<div class="checkbox_admin">
 							<p class="registerADtext">Register as a Seller</p>

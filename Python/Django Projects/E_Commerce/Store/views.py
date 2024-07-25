@@ -11,10 +11,31 @@ import requests
 import pandas as pd
 from django.core.exceptions import *
 import concurrent.futures
-
+import webcolors
 
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Python\\Django Projects\\E_Commerce\\storage_key.json"
+
+###################### Extract Color Name ######################
+def closest_colour(requested_colour):
+    r_req, g_req, b_req = requested_colour
+    min_diff = float('inf')
+    closest_name = None
+    
+    for hex_value, name in webcolors.CSS3_HEX_TO_NAMES.items():
+        r_c, g_c, b_c = webcolors.hex_to_rgb(hex_value)
+        diff = (r_c - r_req) ** 2 + (g_c - g_req) ** 2 + (b_c - b_req) ** 2
+        if diff < min_diff:
+            min_diff = diff
+            closest_name = name
+    return closest_name
+
+def get_colour_name(requested_colour):
+    try:
+        return webcolors.rgb_to_name(requested_colour)
+    except ValueError:
+        return closest_colour(requested_colour)
+
 
 ###################### Check Duplicate Values ######################
 def checkDuplicateData(df:pd.DataFrame):

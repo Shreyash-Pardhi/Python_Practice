@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { SharedAllService } from '../../shared-all.service';
 
@@ -16,6 +16,7 @@ export class LoginComponent {
 
   user?:String;
   title: String = 'Login';
+
   data: any = {
     username: '',
     password: '',
