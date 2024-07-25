@@ -68,6 +68,12 @@
 		margin-right: 15px;
 		margin-top: 5px;
 	}
+
+	.formErr {
+		width: 230px;
+		text-align: justify;
+		margin-top: -10px;
+	}
 </style>
 
 <div class="container h-100">
@@ -78,47 +84,73 @@
 			</div>
 			<div class="d-flex justify-content-center form_container">
 
-				<form (submit)="UserRegister()" method="post">
+				<form (submit)="UserRegister()" [formGroup]="Registration_data">
 
 					<div class="input-group mb-3">
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input class="form-control" type="text" [(ngModel)]="data.username" name="username"
-							placeholder="Username..">
-
+						<input class="form-control" type="text" formControlName="username" placeholder="Username..">
 					</div>
+					@if(Registration_data.controls['username'].touched &&
+					Registration_data.controls['username'].errors?.['required']){
+					<p class="formErr text-danger">Please enter Username</p>
+					}
+
+
 					<div class="input-group mb-2">
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 						</div>
-						<input class="form-control" type="email" [(ngModel)]="data.email" name="email" required="true"
-							placeholder="Email..">
+						<input class=" form-control" type="email" formControlName="email" placeholder="Email..">
 					</div>
+					@if(Registration_data.controls['email'].touched &&
+					Registration_data.controls['email'].errors?.['required']){
+					<p class="formErr text-danger">Please enter Email-ID</p>
+					}
+					@if(Registration_data.controls['email'].touched &&
+					Registration_data.controls['email'].errors?.['pattern']){
+					<p class="formErr text-danger">Please enter a valid Email-ID</p>
+					}
+
+
 					<div class="input-group mb-2">
 						<div class="input-group-append">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
+							<p class="input-group-text"><i class="fas fa-key"></i></p>
 						</div>
-						<input class="form-control" type="password" [(ngModel)]="data.password1" name="password1"
+						<input class="form-control" type="password" formControlName="password1"
 							placeholder="Enter password...">
 					</div>
+					@if(Registration_data.controls['password1'].touched &&
+					Registration_data.controls['password1'].errors?.['required']){
+					<p class="formErr text-danger">Please enter a Password</p>
+					}
+					@if(Registration_data.controls['password1'].touched &&
+					Registration_data.controls['password1'].errors?.['pattern']){
+					<p class="formErr text-danger">Password should be atleast 6 characters long, should
+						contain number and
+						special
+						character</p>
+					}
+
+
 					<div class="input-group mb-2">
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input class="form-control" type="password" [(ngModel)]="data.password2" name="password2"
+						<input class="form-control" type="password" formControlName="password2"
 							placeholder="Re-enter Password...">
 					</div>
 					<div>
 						<div class="checkbox_admin">
 							<p class="registerADtext">Register as a Seller</p>
-							<input class="form-control" type="checkbox" id="checkbox" [(ngModel)]="data.is_admin"
-								name="is_admin">
+							<input class="form-control" type="checkbox" id="checkbox" formControlName="is_admin">
 						</div>
 					</div>
 
 					<div class="d-flex justify-content-center mt-3 login_container">
-						<input class="btn login_btn" type="submit" value="Register Account">
+						<input class="btn login_btn" type="submit" [disabled]="Registration_data.invalid"
+							value="Register Account">
 					</div>
 				</form>
 			</div>
