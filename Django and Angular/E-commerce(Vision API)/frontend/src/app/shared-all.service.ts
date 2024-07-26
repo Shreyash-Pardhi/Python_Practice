@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable, tap } from 'rxjs';
+import { loginSuccess, logout } from './Storage/userInfo.action';
 
 interface Response {
   success: boolean;
@@ -22,7 +24,7 @@ interface userHomeResponce {
 export class SharedAllService {
   readonly API_Endpoint = 'http://127.0.0.1:8000/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store) {}
 
   registerUser(data: any) {
     return this.http.post<Response>(
@@ -39,7 +41,13 @@ export class SharedAllService {
       .pipe(
         tap((res: any) => {
           if (res.success) {
-            localStorage.setItem('token', res.res['token']);
+            localStorage.setItem('token', res.userInfo['token']);
+            this.store.dispatch(
+              loginSuccess({
+                username: res.userInfo.user['username'],
+                isAdmin: res.userInfo.user['is_admin'],
+              })
+            );
           }
         })
       );
@@ -55,6 +63,7 @@ export class SharedAllService {
       .pipe(
         tap(() => {
           localStorage.removeItem('token');
+          this.store.dispatch(logout());
         })
       );
   }

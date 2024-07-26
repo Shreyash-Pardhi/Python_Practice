@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { SharedAllService } from '../../shared-all.service';
 
@@ -14,7 +14,7 @@ import { SharedAllService } from '../../shared-all.service';
 export class LoginComponent {
   constructor(private service: SharedAllService, private router: Router) {}
 
-  user?:String;
+  user?: String;
   title: String = 'Login';
 
   data: any = {
