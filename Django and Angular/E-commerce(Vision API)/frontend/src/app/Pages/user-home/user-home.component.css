@@ -1,6 +1,5 @@
 h1 {
     margin-top: 60px;
-    margin-bottom: 60px;
 }
 
 img {
@@ -28,6 +27,7 @@ figcaption {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding-top: 50px;
 }
 
 #oneProd {

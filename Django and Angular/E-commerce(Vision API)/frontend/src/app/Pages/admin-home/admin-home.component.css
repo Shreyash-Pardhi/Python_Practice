@@ -15,9 +15,21 @@
     margin: 0px 7px
 }
 
-a {
+a,
+.allProd {
     font-size: large;
     font-weight: bold;
+}
+.allProd{
+    text-decoration: none;
+    border-radius: 0.3rem;
+    padding: 7px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: white;
+}
+.allProd:hover{
+    color: black;
+    background-color: bisque;
 }
 
 .container-form {

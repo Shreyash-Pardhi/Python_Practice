@@ -45,10 +45,10 @@ def validateURL(urlDF):
 
 ###################### Saving Data to Cloud ######################
 def addProdToCloud(df:pd.DataFrame):
-    DB = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
+    DB = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_DC.csv")
     finalDF = pd.concat([DB, df], ignore_index=True)
     checkDuplicateData(finalDF)
-    finalDF.to_csv("gs://bucket-shreyash/Product_Data/Product_D.csv",index=False)
+    finalDF.to_csv("gs://bucket-shreyash/Product_Data/Product_DC.csv",index=False)
 
 ###################### Detecting Object from imageURL ######################
 def featureExtraction(uri):
@@ -149,7 +149,7 @@ def addCSVfile(req):
 @login_required(login_url="http://localhost:4200/login")
 def getAllProd(req):
     search_title = 'All Products'
-    df = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
+    df = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_DC.csv")
     df = df[::-1]
     data = [{"link":l, "name":n} for l,n in zip(df['product_url'],df['product_name'])]
     res={"success":True, "s_title": search_title,"message":"","data":data}

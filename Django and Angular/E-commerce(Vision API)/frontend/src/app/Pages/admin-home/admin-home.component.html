@@ -7,7 +7,7 @@
         <div class="nav-elements">
             <a>Hii, <strong>{{ USERNM }}</strong></a>
             <div>
-                <a [routerLink]="'/userHome'">All Products</a>
+                <a [routerLink]="'/userHome'" class="allProd">All Products</a>
                 <a (click)="userLogout()" style="margin-left: 30px;" title="Logout">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                         class="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -30,7 +30,6 @@
                 </div>
                 <div class="card-body" align='center'>
                     <form (submit)="addSingleProduct()">
-                        <!-- {% csrf_token %} -->
                         <div class="form-group">
                             <input type="text" [(ngModel)]="inp_data.prodName" name="prodName" id="productName"
                                 class="form-control" placeholder="Product Name" required>

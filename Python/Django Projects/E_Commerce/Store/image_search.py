@@ -87,7 +87,7 @@ def rel(df: pd.DataFrame, inp):
 def check_relevent_products(inp_features, lbl):
     try: 
         #Reading Data From Google Cloud Bucket CSV
-        DB = pd.read_csv("gs://bucket-shreyash/Product_Data/Product_D.csv")
+        DB = pd.read_csv("D:\\Work and Assignments\\Python\\Assessment-2 (GOOGLE VISION API)\\results.csv")
         #features Present in database csv file
         DB_features = DB['object']
         
