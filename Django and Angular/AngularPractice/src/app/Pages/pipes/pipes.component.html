@@ -1,0 +1,88 @@
+<h1 class="text-center font-bold py-5 text-lg underline">Date Pipe Examples</h1>
+<div class="row">
+    <div class="columns-5 ">
+        <div class="bg-gray-300 rounded-md">
+            <h2 class="ml-5 mb-0 font-bold">Date Now in number</h2>
+            <h2 class="ml-5 mb-5">{{date}}</h2>
+
+            <h2 class="ml-5 mb-0 font-bold">Date after Pipe</h2>
+            <h2 class="ml-5">{{date | date}}</h2>
+        </div>
+
+        <div class="bg-gray-300 rounded-md">
+            <h2 class="ml-5 mb-0 font-bold">Date</h2>
+            <h2 class="ml-5 mb-5">{{date | date}}</h2>
+
+            <h2 class="ml-5 mb-0 font-bold">Date after Pipe:(medium)</h2>
+            <h2 class="ml-5">{{date | date:'medium'}}</h2>
+        </div>
+
+        <div class="bg-gray-300 rounded-md">
+            <h2 class="ml-5 mb-0 font-bold">Date</h2>
+            <h2 class="ml-5 mb-5">{{date | date:'medium'}}</h2>
+
+            <h2 class="ml-5 mb-0 font-bold">Date after Pipe:(shortTime)</h2>
+            <h2 class="ml-5">{{date | date:'shortTime'}}</h2>
+        </div>
+
+        <div class="bg-gray-300 rounded-md">
+            <h2 class="ml-5 mb-0 font-bold">Date</h2>
+            <h2 class="ml-5 mb-5">{{date | date:'shortTime'}}</h2>
+
+            <h2 class="ml-5 mb-0 font-bold">Date after Pipe:(mm:ss)</h2>
+            <h2 class="ml-5">{{date | date:'mm:ss'}}</h2>
+        </div>
+
+        <div class="bg-gray-300 rounded-md">
+            <h2 class="ml-5 mb-0 font-bold">Date Now in number</h2>
+            <h2 class="ml-5 mb-5">{{date}}</h2>
+
+            <h2 class="ml-5 mb-0 font-bold">Date after Pipe</h2>
+            <h2 class="ml-5">{{date | date:"MMM dd, yyyy 'at' hh:mm a"}}</h2>
+        </div>
+    </div>
+</div>
+
+
+
+<h1 class="text-center font-bold py-5 text-lg mt-10 underline">(UpperCase, LowerCase, TitleCase) Pipe Examples</h1>
+<div class="row">
+    <div class="columns-3 ">
+        <div class="bg-gray-300 rounded-md">
+            <h2 class="ml-5 mb-0 font-bold">normal string</h2>
+            <h2 class="ml-5 mb-5">{{someString}}</h2>
+
+            <h2 class="ml-5 mb-0 font-bold">Uppercase Pipe</h2>
+            <h2 class="ml-5">{{someString | uppercase}}</h2>
+        </div>
+
+        <div class="bg-gray-300 rounded-md">
+            <h2 class="ml-5 mb-0 font-bold">string</h2>
+            <h2 class="ml-5 mb-5">{{someString | uppercase}}</h2>
+
+            <h2 class="ml-5 mb-0 font-bold">Lowercase Pipe</h2>
+            <h2 class="ml-5">{{someString | lowercase}}</h2>
+        </div>
+
+        <div class="bg-gray-300 rounded-md">
+            <h2 class="ml-5 mb-0 font-bold">string</h2>
+            <h2 class="ml-5 mb-5">{{someString | lowercase}}</h2>
+
+            <h2 class="ml-5 mb-0 font-bold">Titlecase Pipe</h2>
+            <h2 class="ml-5">{{someString | titlecase}}</h2>
+        </div>
+    </div>
+</div>
+
+<h1 class="text-center font-bold py-5 text-lg mt-10 underline">Json Pipe Examples</h1>
+<div class="row">
+    <div class="columns-1">
+        <div class="bg-gray-300 rounded-md">
+            <h2 class="ml-5 mb-0 font-bold">Direct Json</h2>
+            <h2 class="ml-5 mb-5">{{jsonOBJ}}</h2>
+
+            <h2 class="ml-5 mb-0 font-bold">json Pipe</h2>
+            <h2 class="ml-5">{{jsonOBJ | json}}</h2>
+        </div>
+    </div>
+</div>
