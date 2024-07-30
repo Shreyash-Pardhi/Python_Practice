@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
+  AsyncPipe,
   DatePipe,
   JsonPipe,
   LowerCasePipe,
   TitleCasePipe,
   UpperCasePipe,
 } from '@angular/common';
+import { interval, map, Observable } from 'rxjs';
 @Component({
   selector: 'app-pipes',
   standalone: true,
@@ -17,6 +19,7 @@ import {
     LowerCasePipe,
     TitleCasePipe,
     JsonPipe,
+    AsyncPipe,
   ],
   templateUrl: './pipes.component.html',
   styleUrl: './pipes.component.css',
@@ -30,4 +33,10 @@ export class PipesComponent {
     previous: [17, 16, 15, 14],
     example: 'JsonPipe',
   };
+
+  currTime: Observable<Date> = new Observable<Date>();
+
+  constructor() {
+    this.currTime = interval(1000).pipe(map(() => new Date()));
+  }
 }

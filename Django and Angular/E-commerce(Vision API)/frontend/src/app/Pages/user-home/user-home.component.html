@@ -3,7 +3,12 @@
 <nav class="navbar-main">
     <div class="nav-elements">
 
-        <a>Hii, <strong>{{ Uname}}</strong></a>
+        <a>Hii, <strong>{{ Uname }}</strong></a>
+
+        <div>
+            
+        </div>
+
         <div class="right-nav">
             <a *ngIf="isAdmin" [routerLink]="'/adminHome'" style="margin-left: 30px;" title="Add products to database">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"

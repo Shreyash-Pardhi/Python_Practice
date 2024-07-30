@@ -1,0 +1,24 @@
+<h1 class="text-center font-bold py-5 text-lg underline">Signal Examples</h1>
+<div class="row">
+    <div class="columns-4">
+        <div class="bg-gray-500 rounded-md">
+            <div class="text-lg font-bold p-2 sm:items-stretch">
+                {{ name() }}
+                <button (click)="changeName()"
+                    class="ml-9 bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 border border-blue-700 rounded">
+                    Change Name
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-gray-500 rounded-md">
+            <div class="text-lg font-bold p-2 sm:items-stretch">
+                {{ num1() }} : {{ num2() }}
+                <button (click)="swap()"
+                    class="ml-9 bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 border border-blue-700 rounded">
+                    Swap
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

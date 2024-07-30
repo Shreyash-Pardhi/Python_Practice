@@ -5,9 +5,6 @@ import { RouterLink } from '@angular/router';
   selector: 'app-home',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  template: ` <h1 class="text-8xl text-center mt-10">Angular-18 Practice</h1> `,
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

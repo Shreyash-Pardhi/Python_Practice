@@ -86,3 +86,16 @@
         </div>
     </div>
 </div>
+
+<h1 class="text-center font-bold py-5 text-lg mt-10 underline">Async Pipe Examples</h1>
+<div class="row mb-10">
+    <div class="columns-1">
+        <div class="bg-gray-300 rounded-md">
+            <h2 class="ml-5 mb-0 font-bold">Before async pipe</h2>
+            <h2 class="ml-5 mb-5">{{currTime}}</h2>
+
+            <h2 class="ml-5 mb-0 font-bold">Async Pipe</h2>
+            <h2 class="ml-5">{{currTime | async | date:'hh:mm:ss a'}}</h2>
+        </div>
+    </div>
+</div>
