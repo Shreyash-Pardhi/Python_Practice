@@ -1,7 +1,7 @@
 import os
 from google.cloud import vision
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "D:\\Work and Assignments\\Python\\Assessment-2 (GOOGLE VISION API)\\storage_key.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:\\Work and Assignments\\Django and Angular\\E-commerce(Vision API)\\backend\\storage_key.json"
 
 def detect_obj(uri):
     client = vision.ImageAnnotatorClient()
@@ -14,14 +14,19 @@ def detect_obj(uri):
     
     response = client.label_detection(image=img)
     labels = response.label_annotations
+    txtres = client.text_detection(image=img)
+    tx = txtres.text_annotations
     label = [l.description for l in labels ]
-    print(obj)
-    print(label)
+    texts = [t.description for t in tx]
+    
+    print("obj:",obj)
+    print("lab:",label)
+    print("txt: ",tx)
     
     txt = ''
     txt= list(set(obj).intersection(label)) if set(obj).intersection(label) else label[:2] if len(obj) == 0 else obj
     t = str(txt)
-    return t
+    return 'done'
     
 
-print(detect_obj("https://m.media-amazon.com/images/I/31k4JysPQ5L._AC_UY327_FMwebp_QL65_.jpg"))
+print(detect_obj("https://www.hubspot.com/hs-fs/hubfs/registration%20form%20template%20by%20W3Docs.png?width=600&name=registration%20form%20template%20by%20W3Docs.png"))

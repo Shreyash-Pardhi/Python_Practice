@@ -144,3 +144,24 @@ svg {
     
     transition: transform 0.4s;
 }
+
+.category_icon{
+    background-color: white;
+    width: 53px;
+    height: 38px;
+    border: 1px solid black;
+}
+.category_icon:hover{
+    background-color: rgb(160, 160, 160);
+    transform: translateY(-0.3rem);
+    transition: transform 0.5s;
+    border: none;
+}
+
+.categories{
+    display: flex;
+    list-style: none;
+    text-decoration: none;
+    width: 335px;
+    justify-content: space-between;
+}

@@ -30,6 +30,29 @@ export class UserHomeComponent {
     search_txt: '',
   };
 
+  categories = [
+    {
+      name: 'Shoe',
+      icon: 'shoe.ico',
+    },
+    {
+      name: 'Shirt',
+      icon: 'top.ico',
+    },
+    {
+      name: 'Pant',
+      icon: 'pant.ico',
+    },
+    {
+      name: 'Phone',
+      icon: 'phone.ico',
+    },
+    {
+      name: 'Laptop',
+      icon: 'laptop.ico',
+    },
+  ];
+
   constructor(
     private service: SharedAllService,
     private router: Router,
@@ -69,6 +92,18 @@ export class UserHomeComponent {
     this.service.logoutUser().subscribe((res) => {
       this.loaderService.hideLoader();
       this.router.navigateByUrl('/login');
+    });
+  }
+
+  getCategory(category: string) {
+    this.search_query.search_txt = category;
+    this.loaderService.showLoader();
+    this.service.userHome(this.search_query).subscribe((res) => {
+      if (res.success) {
+        this.data = res.data;
+        this.ti = res.s_title;
+        this.loaderService.hideLoader();
+      }
     });
   }
 }

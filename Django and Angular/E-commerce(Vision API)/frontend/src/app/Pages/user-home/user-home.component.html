@@ -5,8 +5,15 @@
 
         <a>Hii, <strong>{{ Uname }}</strong></a>
 
-        <div>
-            
+        <div class="categories">
+
+            <li *ngFor="let category of categories">
+
+                <img (click)="getCategory(category.name)" class="category_icon"
+                    [src]="'/category_icons/' + category.icon" alt="{{category.name}} icon">
+
+            </li>
+
         </div>
 
         <div class="right-nav">

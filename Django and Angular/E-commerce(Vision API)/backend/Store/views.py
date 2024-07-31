@@ -1,10 +1,9 @@
-from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
-from rest_framework.response import Response
 from .serializers import RegisterSerializer, LoginSerializer
 from .models import User
-from django.contrib.auth import login, logout
+from django.contrib.auth import login
 from google.cloud import vision
 from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import authentication_classes, permission_classes,api_view
