@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+<div>
+    <h3>Most Accessed Document</h3>
+    <div>{{ data['most_accessed']|safe }}</div>
+    <h3>Least Accessed Document</h3>
+    <div>{{ data['least_accessed']|safe }}</div>
+    <!-- <h3>Active Users</h3>
+    <div>{{ data['active_users']|safe }}</div>
+    <h3>Inactive Users</h3>
+    <div>{{ data['inactive_users']|safe }}</div> -->
+    <h3>Trend Analysis</h3>
+    <div>{{ data['trend']|safe }}</div>
+    <!-- <h3>Sentiment Analysis</h3>
+    <div>{{ data['sentiment']|safe }}</div> -->
+    <h3>Knowledge Gaps</h3>
+    <div>{{ data['gaps']|safe }}</div>
+    <h3>Document Redundancy</h3>
+    <div>{{ data['redundancy']|safe }}</div>
+    <h3>Suggestions</h3>
+    <p>{{ data['suggestion'] }}</p>
+    <h3>Graphs</h3>
+    <div class="graphs">
+        <img src="{{ url_for('static', filename='images/doc_interactions.png') }}" alt="Document Interactions">
+        <img src="{{ url_for('static', filename='images/user_engagement.png') }}" alt="User Engagement">
+        <img src="{{ url_for('static', filename='images/trend_analysis.png') }}" alt="Trend Analysis">
+        <img src="{{ url_for('static', filename='images/knowledge_gaps.png') }}" alt="Knowledge Gaps">
+        <img src="{{ url_for('static', filename='images/redundancy_heatmap.png') }}" alt="Redundancy Heatmap">
+    </div>
+</div>
+{% endblock %}

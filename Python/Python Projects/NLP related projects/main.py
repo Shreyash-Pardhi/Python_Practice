@@ -1,96 +1,108 @@
-import re
-import pdfplumber
-from docx import Document
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from gensim import corpora, models
+import seaborn as sns
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.cluster import KMeans
+from sklearn.linear_model import LinearRegression
+import json
+import datetime
 
-nltk.download('stopwords')
+# Sample data structure for documents and user interactions
+documents = pd.DataFrame({
+    'doc_id': [1, 2, 3],
+    'title': ['Doc 1', 'Doc 2', 'Doc 3'],
+    'content': ['Content of document 1', 'Content of document 2', 'Content of document 3'],
+    'views': [150, 200, 50],
+    'downloads': [100, 150, 30],
+    'edits': [10, 20, 5],
+    'feedback': ['Good', 'Average', 'Poor'],
+    'ratings': [4.5, 3.0, 2.0],
+    'last_accessed': ['2024-07-01', '2024-06-15', '2024-05-20']
+})
 
-# Function to extract text from PDF files
-def extract_text_from_pdf(file_path):
-    text = ""
-    with pdfplumber.open(file_path) as pdf:
-        for page in pdf.pages:
-            text += page.extract_text()
-    return text
+user_interactions = pd.DataFrame({
+    'user_id': [1, 2, 1],
+    'doc_id': [1, 2, 3],
+    'time_spent': [30, 45, 10],
+    'activity': ['view', 'download', 'edit']
+})
 
-# Function to extract text from DOCX files
-def extract_text_from_docx(file_path):
-    doc = Document(file_path)
-    text = "\n".join([para.text for para in doc.paragraphs])
-    return text
+search_queries = pd.DataFrame({
+    'query': ['document management', 'analytics', 'reporting'],
+    'results': [10, 5, 0]
+})
 
-# Function to read CSV files
-def read_csv_file(file_path):
-    df = pd.read_csv(file_path)
-    return df
+# Function to calculate document access metrics
+def document_access_metrics(documents):
+    documents['total_interactions'] = documents[['views', 'downloads', 'edits']].sum(axis=1)
+    most_accessed = documents.sort_values(by='total_interactions', ascending=False).head(1)
+    least_accessed = documents.sort_values(by='total_interactions').head(1)
+    return most_accessed, least_accessed
 
-# Function to preprocess text
-def preprocess_text(text):
-    text = text.lower()
-    text = re.sub(r'[^\w\s]', '', text)
-    words = word_tokenize(text)
-    stop_words = set(stopwords.words('english'))
-    words = [word for word in words if word not in stop_words]
-    return words
+# Function to monitor user engagement
+def user_engagement(user_interactions):
+    user_activity = user_interactions.groupby('user_id').size()
+    active_users = user_activity[user_activity > 1]
+    inactive_users = user_activity[user_activity == 1]
+    return active_users, inactive_users
 
-# Function to perform topic modeling
-def topic_modeling(texts):
-    dictionary = corpora.Dictionary(texts)
-    corpus = [dictionary.doc2bow(text) for text in texts]
-    lda = models.LdaModel(corpus, num_topics=5, id2word=dictionary, passes=15)
-    topics = lda.print_topics(num_words=4)
-    return topics
+# Function to perform trend analysis
+def trend_analysis(documents):
+    documents['last_accessed'] = pd.to_datetime(documents['last_accessed'])
+    documents.set_index('last_accessed', inplace=True)
+    trend = documents.resample('M').sum()
+    return trend
 
-# Function to visualize topics
-def visualize_topics(topics):
-    for i, topic in enumerate(topics):
-        print(f"Topic {i+1}: {topic}")
+# Function to collect and analyze feedback
+def sentiment_analysis(feedback):
+    from textblob import TextBlob
+    feedback['sentiment'] = feedback['feedback'].apply(lambda x: TextBlob(x).sentiment.polarity)
+    return feedback
 
-# Function to plot usage trends
-def plot_usage_trends(usage_data):
-    usage_data['date'] = pd.to_datetime(usage_data['date'])
-    usage_data.set_index('date', inplace=True)
-    usage_data.resample('M').sum().plot()
-    plt.title('Document Usage Trends')
-    plt.xlabel('Date')
-    plt.ylabel('Usage Count')
-    plt.show()
+# Function to identify knowledge gaps
+def search_query_analysis(search_queries):
+    no_results = search_queries[search_queries['results'] == 0]
+    return no_results
 
-# Main function to analyze document
-def analyze_document(file_path, file_type, usage_data=None):
-    if file_type == 'pdf':
-        text = extract_text_from_pdf(file_path)
-    elif file_type == 'docx':
-        text = extract_text_from_docx(file_path)
-    elif file_type == 'csv':
-        data = read_csv_file(file_path)
-        text = data.to_string()
+# Function to detect redundancy in documents
+def redundancy_detection(documents):
+    vectorizer = TfidfVectorizer()
+    tfidf_matrix = vectorizer.fit_transform(documents['content'])
+    cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
+    return cosine_sim
+
+# Function to generate dashboard
+def generate_dashboard(documents, user_interactions, search_queries):
+    most_accessed, least_accessed = document_access_metrics(documents)
+    active_users, inactive_users = user_engagement(user_interactions)
+    trend = trend_analysis(documents)
+    sentiment = sentiment_analysis(documents[['feedback']])
+    gaps = search_query_analysis(search_queries)
+    redundancy = redundancy_detection(documents)
+
+    print("Most Accessed Document:\n", most_accessed)
+    print("Least Accessed Document:\n", least_accessed)
+    print("Active Users:\n", active_users)
+    print("Inactive Users:\n", inactive_users)
+    print("Trend Analysis:\n", trend)
+    print("Sentiment Analysis:\n", sentiment)
+    print("Knowledge Gaps:\n", gaps)
+    print("Document Redundancy:\n", redundancy)
+
+# Function to export data
+def export_data(data, format='csv'):
+    if format == 'csv':
+        data.to_csv('exported_data.csv', index=False)
+    elif format == 'excel':
+        data.to_excel('exported_data.xlsx', index=False)
+    elif format == 'json':
+        data.to_json('exported_data.json')
     else:
-        raise ValueError("Unsupported file type")
+        print("Unsupported format")
 
-    preprocessed_text = preprocess_text(text)
-    topics = topic_modeling([preprocessed_text])
-    visualize_topics(topics)
-
-    if usage_data is not None:
-        plot_usage_trends(usage_data)
-
-# Example usage
+# Main function
 if __name__ == "__main__":
-    # Analyze a PDF document
-    analyze_document('D:\\Work and Assignments\\Python\\Python Projects\\NLP related projects\\Chapter1.pdf', 'pdf')
-
-    # Analyze a DOCX document
-    analyze_document('D:\\Work and Assignments\\Python\\Python Projects\\NLP related projects\\new.docx', 'docx')
-
-    # Analyze a CSV document and plot usage trends
-    usage_data = pd.DataFrame({
-        'date': ['2023-01-01', '2023-02-01', '2023-03-01', '2023-04-01'],
-        'usage_count': [10, 15, 10, 5]
-    })
-    analyze_document('D:\\Work and Assignments\\Python\\Python Projects\\NLP related projects\\demo.csv', 'csv', usage_data)
+    generate_dashboard(documents, user_interactions, search_queries)
+    export_data(documents, format='csv')
