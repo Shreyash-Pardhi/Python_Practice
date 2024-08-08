@@ -1,27 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
 import pandas as pd
-import numpy as np
-from process_files import process_files, generate_dashboard, export_data
-from werkzeug.utils import secure_filename
-import time
+from process_files import process_files, generate_dashboard
 import math
 import json
 import datetime
+from pathlib import Path
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = {'pdf', 'docx', 'csv', 'xlsx', 'txt'}
+UPLOAD_FOLDER = 'D:\\Work and Assignments\\Python\\Assignments\\PDF Chapter Seperator\\'
+ALLOWED_EXTENSIONS = {'pdf', 'docx', 'csv', 'xlsx', 'txt', 'py', 'json'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def get_file_metadata(file):
-    file_info = file.stream
-    size = convert_size(file_info.seek(0, os.SEEK_END))
-    file_info.seek(0, os.SEEK_SET)
-    return size, file_info
 
 def convert_size(size):
     if size == 0:
@@ -45,24 +37,29 @@ def upload_file():
     if 'files[]' not in request.files:
         return redirect(request.url)
     files = request.files.getlist('files[]')
+    # print(files)
     file_paths = []
     original_metadata = []
 
     for file in files:
         if file and allowed_file(file.filename):
+            # Save the file temporarily to fetch metadata
+            # filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            print(file_path)
+            # file.save(file_path)
+
             # Fetch original metadata
-            size, file_info = get_file_metadata(file)
+            file_info = Path(file_path)
             original_metadata.append({
-                'filename': secure_filename(file.filename),
-                'size': size,
-                'created': format_time(file_info.stat().st_birthtime),  # Placeholder for original created time
-                'modified': format_time(file_info.stat().st_mtime),  # Placeholder for original modified time
-                'accessed': format_time(file_info.stat().st_atime)   # Placeholder for original accessed time
+                'filename': file_info.name,
+                'size': convert_size(file_info.stat().st_size),
+                'created': format_time(file_info.stat().st_birthtime),  # Creation time
+                'modified': format_time(file_info.stat().st_mtime),  # Modified time
+                'accessed': format_time(file_info.stat().st_atime)   # Accessed time
             })
 
-            filename = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(file.filename))
-            file.save(filename)
-            file_paths.append(filename)
+            file_paths.append(file_path)
 
     return redirect(url_for('dashboard', file_paths=','.join(file_paths), metadata=json.dumps(original_metadata)))
 
@@ -82,7 +79,7 @@ def dashboard():
 
     search_queries = pd.DataFrame({
         'query': ['document management', 'analytics', 'reporting'],
-        'results': [10, 5, 0]
+        'results': [10, 0, 0]
     })
 
     dashboard_data = generate_dashboard(documents, user_interactions, search_queries)

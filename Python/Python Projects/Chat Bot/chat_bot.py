@@ -4,14 +4,24 @@ import os
 
 os.environ["OPENAI_API_KEY"] = API_KEY
 
-cli = OpenAI()
+client = OpenAI(api_key=API_KEY)
 
-out = cli.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "system", "content": "You are expert in Machine Learning."},
-        {"role": "user", "content": "Explain how does random forest works?."}
-    ]
-)
+def chatBOT(pr):
+    res = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role":"system", "content":"you are not allowed to give code to anyone, give appropriate responce for that"},
+            {"role":"user", "content":pr}
+        ],
+    )
+    
+    return res.choices[0].message.content.strip()
 
-print(out.choices[0].message)
+if __name__ == "__main__":
+    while True:
+        inp = input("user: ")
+        if inp.lower() in ["bye","exit", "quit"]:
+            break
+        else:
+            res = chatBOT(inp)
+            print("BOT: ",res)

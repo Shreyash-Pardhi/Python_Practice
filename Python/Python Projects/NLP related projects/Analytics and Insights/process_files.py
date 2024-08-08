@@ -1,19 +1,16 @@
-import os
 import pandas as pd
 import numpy as np
 import datetime
 import fitz  # PyMuPDF
 from docx import Document
-from textblob import TextBlob
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
-from pathlib import Path
 import datetime
-import math
+import json
 
 def extract_text_from_pdf(file_path):
     doc = fitz.open(file_path)
@@ -39,6 +36,15 @@ def read_excel(file_path):
 def read_txt(file_path):
     with open(file_path, 'r') as file:
         return file.read()
+    
+def read_py(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        return file.read()
+
+def read_json(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        return json.dumps(json.load(file), indent=4)
+
 
 def process_files(file_paths, metadata):
     documents = []
@@ -53,6 +59,10 @@ def process_files(file_paths, metadata):
             content = read_excel(file_path).to_string()
         elif file_path.endswith('.txt'):
             content = read_txt(file_path)
+        elif file_path.endswith('.py'):
+            content = read_py(file_path)
+        elif file_path.endswith('.json'):
+            content = read_json(file_path)
         else:
             print(f"Unsupported file type: {file_path}")
             continue
@@ -74,20 +84,20 @@ def process_files(file_paths, metadata):
 def document_access_metrics(documents):
     documents['total_interactions'] = documents[['views', 'downloads', 'edits']].sum(axis=1)
     documents = documents.drop('content', axis=1)
-    most_accessed = documents.sort_values(by='total_interactions', ascending=False).head(1)
-    least_accessed = documents.sort_values(by='total_interactions').head(1)
+    most_accessed = documents.sort_values(by='total_interactions', ascending=False).head(1).reset_index(drop=True)
+    least_accessed = documents.sort_values(by='total_interactions').head(1).reset_index(drop=True)
     return most_accessed, least_accessed
 
 def trend_analysis(documents):
     documents['last_accessed'] = pd.to_datetime(documents['last_accessed'])
     documents = documents.drop('content', axis=1)
-    trend = documents.groupby(pd.Grouper(key='last_accessed', freq='M')).sum()
-    trend = trend[(trend.T != 0).any()]
-    trend = trend.sort_values(by='total_interactions', ascending=False)
+    # trend = documents.groupby(pd.Grouper(key='last_accessed', freq='M')).sum()
+    # trend = trend[(trend.T != 0).any()]
+    trend = documents.sort_values(by='total_interactions', ascending=False).reset_index(drop=True)
     return trend
 
 def search_query_analysis(search_queries):
-    no_results = search_queries[search_queries['results'] == 0]
+    no_results = search_queries[search_queries['results'] == 0].reset_index(drop=True)
     return no_results
 
 def redundancy_detection(documents):
@@ -95,14 +105,16 @@ def redundancy_detection(documents):
     tfidf_matrix = vectorizer.fit_transform(documents['content'])
     cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
     
-    suggetion = 'NA'
+    suggestion = []
     num_docs = len(documents)
     for i in range(num_docs):
-        for j in range(num_docs):
-            if i != j and cosine_sim[i, j] > 0.95:
-                suggetion = f"Documents '{documents.iloc[i]['file_path']}' and '{documents.iloc[j]['file_path']}' contain similar content."
-                
-    return cosine_sim, suggetion
+        for j in range(i):
+            if cosine_sim[i, j] > 0.95:
+                suggestion.append(f"Documents '{documents.iloc[i]['file_path']}' and '{documents.iloc[j]['file_path']}' contain similar content.")
+    
+    sug = "NA" if len(suggestion)==0 else suggestion
+    
+    return cosine_sim, sug
 
 def generate_dashboard(documents, user_interactions, search_queries):
     most_accessed, least_accessed = document_access_metrics(documents)
@@ -139,7 +151,7 @@ def generate_dashboard(documents, user_interactions, search_queries):
     plt.close()
 
     plt.figure(figsize=(10, 6))
-    sns.lineplot(x=trend.index, y=trend['total_interactions'])
+    sns.lineplot(x=trend['last_accessed'], y=trend['total_interactions'])
     plt.title('Trend Analysis: Document Interactions over Time')
     plt.xlabel('Time')
     plt.ylabel('Total Interactions')

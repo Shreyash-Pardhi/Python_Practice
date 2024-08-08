@@ -3,6 +3,9 @@
 <h2>Upload Documents</h2>
 <form method="POST" action="{{ url_for('upload_file') }}" enctype="multipart/form-data">
     <div class="form-group">
+        <!-- <label for="folder">Folder Name:</label>
+        <input type="text" name="folder" id="folder" required>
+        <br><br> -->
         <label for="files">Choose files</label>
         <input type="file" class="form-control" id="files" name="files[]" multiple required>
     </div>

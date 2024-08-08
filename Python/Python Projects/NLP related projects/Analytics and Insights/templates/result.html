@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<body>
+    <h1>Metadata for {{ filename }}</h1>
+    <ul>
+    {% for key, value in metadata.items() %}
+        <li><strong>{{ key }}:</strong> {{ value }}</li>
+    {% endfor %}
+    </ul>
+    <a href="/">Upload another file</a>
+</body>
+</html>
