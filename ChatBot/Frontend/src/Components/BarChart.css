@@ -1,0 +1,11 @@
+.bar-chart-container {
+    width: 700px;
+    /* Set the width you need */
+    height: 400px;
+    /* Set the height you need */
+}
+
+.bar-chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}

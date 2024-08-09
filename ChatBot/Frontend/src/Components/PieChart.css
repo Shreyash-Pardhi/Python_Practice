@@ -1,0 +1,11 @@
+.pie-chart-container {
+    width: 400px;
+    /* Set the width you need */
+    height: 400px;
+    /* Set the height you need */
+}
+
+.pie-chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}

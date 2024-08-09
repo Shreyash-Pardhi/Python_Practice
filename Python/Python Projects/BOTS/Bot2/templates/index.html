@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Data Visualizations</title>
+</head>
+
+<body>
+    <h1>Employee Data Visualizations</h1>
+
+    <h2>Salary Distribution</h2>
+    <div>{{ scatter_html|safe }}</div>
+
+    <h2>Average Salary by Department</h2>
+    <div>{{ bar_html|safe }}</div>
+
+    <h2>Gender Distribution</h2>
+    <div>{{ pie_html|safe }}</div>
+
+</body>
+
+</html>

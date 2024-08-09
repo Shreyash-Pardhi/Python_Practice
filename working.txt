@@ -1,0 +1,28 @@
+ineractive code:
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        callbacks: {
+          label: function (tooltipItem) {
+            let percentage = (
+              (tooltipItem.raw /
+                tooltipItem.chart._metasets[0].total) *
+              100
+            ).toFixed(2);
+            return `${tooltipItem.label}: ${tooltipItem.raw} (${percentage}%)`;
+          },
+        },
+      },
+    },
+    onClick: (event, elements) => {
+      if (elements.length > 0) {
+        const index = elements[0].index;
+        alert(`You clicked on ${data.labels[index]}`);
+      }
+    },
+  };

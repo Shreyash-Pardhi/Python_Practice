@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analyzer Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Upload a CSV file for Analysis</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+    {% if description %}
+    <div>
+        <h2>Data Description</h2>
+        {{ description | safe }}
+    </div>
+    <div>
+        <h2>Data Visualization</h2>
+        <img src="{{ url_for('static', filename='plot.png') }}" alt="Data plot">
+    </div>
+    {% endif %}
+</body>
+
+</html>
